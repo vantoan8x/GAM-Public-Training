@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="wiki-body" class="gollum-markdown-content">
+        <div class="markdown-body">
+            <pre><code>// Example of a PipeLine structure
+[
+"/api/route/path/",
+
+[
+    `&lt;funcLabel&gt;A.functionName(pipeInput) &gt; outputKey: Param1: Param2: subParam31, subParam32`,
+    `&lt;funcLabel&gt;A.functionName(pipeInput) &gt; outputKey: Param1: Param2: subParam31, subParam32`
+],
+
+{ 
+    "key1": "config1"
+    "key2": "config2",
+    "name": "Name of this PipeLine"
+},
+
+"pipeLineName_InOtherWay"
+]
+
+</code></pre>
+            <h3>
+                <a id="user-content-how-to-use-api-core-carmpushvk-common-controller-route-model-util-service-view-config-hook-context-param-functions"
+                    class="anchor"
+                    href="#how-to-use-api-core-carmpushvk-common-controller-route-model-util-service-view-config-hook-context-param-functions"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>How to use API Core CARMPUSHVK (Common, Controller, Route, Model, Util, Service, View,
+                Config, Hook, context Param) Functions:</h3>
+            <ul>
+                <li>
+                    <strong>C</strong>: used for functions defined in linked Controller.</li>
+                <li>
+                    <strong>A</strong>: used for functions included by config (Controller, Route config) from Core
+                    Common function.</li>
+                <li>
+                    <strong>R</strong>: used for functions defined in linked Route.</li>
+                <li>
+                    <strong>M</strong>: used for functions defined in linked Model.</li>
+                <li>
+                    <strong>P</strong>: used for object in Param/Req when pipeline functions called.</li>
+                <li>
+                    <strong>U</strong>: used for function in Util.</li>
+                <li>
+                    <strong>S</strong>: used for function in Service.</li>
+                <li>
+                    <strong>H</strong>: used for function in Hook.</li>
+                <li>
+                    <strong>V</strong>: used for function in View.</li>
+                <li>
+                    <strong>K</strong>: used for Config Object.</li>
+                <li>
+                    <strong>Req</strong>: used for Param Input, when Input flow is asterisk *.</li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-some-common-function-a-usually-used-to-verify-model-field" class="anchor"
+                    href="#some-common-function-a-usually-used-to-verify-model-field" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Some Common function A (usually used to verify model field).</h3>
+            <ul>
+                <li>
+                    <strong>A.autoId()</strong>: auto create new Mongo Id obejct.</li>
+                <li>
+                    <strong>A.autoIncrease: model)</strong>: auto increase this key value.</li>
+                <li>
+                    <strong>A.autoHash(length = 8)</strong>: auto generat hash string with length.</li>
+                <li>
+                    <strong>A.isIdString()</strong>: check if a Mongo ID String, return string Id.</li>
+                <li>
+                    <strong>A.isString(min = -1, max = -1)</strong>: check if val is String, max: maximum length, min:
+                    minimum length.</li>
+                <li>
+                    <strong>A.isPath(val)</strong>: check if val is File/Folder path.</li>
+                <li>
+                    <strong>A.isDate()</strong>: check if val is Date, return Date type.</li>
+                <li>
+                    <strong>A.isNow()</strong>: get current Date Time.</li>
+                <li>
+                    <strong>A.isTime()</strong>: check if val is Time hh:mm:ss or number, 01h01m01s = (01 * 3600) + (01
+                    * 60) + 01 = 3661, return Number, mili-second is point decimal.</li>
+                <li>
+                    <strong>A.isPhone()</strong>: check if val is Phone format +xxxxxxxx (6-14 digit), return String
+                    Phone value.</li>
+                <li>
+                    <strong>A.isEmail()</strong>: check if val is Email format, return String value.</li>
+                <li>
+                    <strong>A.isPassword(pass, MinLength, encode)</strong>: check if val is Password format, return
+                    String value.</li>
+                <li>
+                    <strong>A.isNumber(min, max)</strong>: check if val is Decimal number, in range of (min, max) if any
+                    side defined, return Number value.</li>
+                <li>
+                    <strong>A.isInteger(min, max)</strong>: check if val is Integer number, in range of (min, max) if
+                    any side defined, return Integer value.</li>
+                <li>
+                    <strong>A.isBoolean()</strong>: check if val is Boolean format, true or false, return Boolean value.
+                </li>
+                <li>
+                    <strong>A.isArrayIds()</strong>: check if val is Array contain all Id string, return Array if Id
+                    String value.</li>
+                <li>
+                    <strong>A.isArray()</strong>: check if val is Array format, return Array value.</li>
+                <li>
+                    <strong>A.isObject()</strong>: check if val is Object format, return Object value.</li>
+                <li>
+                    <strong>A.isNumberEnum(...arrs)</strong>: check if val is Number Enumeration, list on the rest
+                    parameters, return Number value.</li>
+                <li>
+                    <strong>A.isStringEnum(...arrs)</strong>: check if val is String Enumeration, list on the rest
+                    parameters, return String value.</li>
+                <li>
+                    <strong>A.isEnumArray(vals, ...arrs)</strong>: check if vals contains Number/String Enumeration,
+                    list on the rest parameters, return vals value.</li>
+                <li>
+                    <strong>A.isNumberEnumArray(vals, ...arrs)</strong>: check if vals contains Number Enumeration, list
+                    on the rest parameters, return vals value.</li>
+                <li>
+                    <strong>A.isStringEnumArray(vals, ...arrs)</strong>: check if vals contains String Enumeration, list
+                    on the rest parameters, return vals value.</li>
+                <li>
+                    <strong>A.isEnum(...arrs)</strong>: check if val is Number/String Enumeration, list on the rest
+                    parameters, return val value.</li>
+                <li>
+                    <strong>A.isRegex(regex)</strong>: check if val matched regex expression, return String value.</li>
+                <li>
+                    <strong>A.isAlpha(min = -1, max = -1)</strong>: check if alpha string.</li>
+                <li>
+                    <strong>A.isAlphaNumeric(min = -1, max = -1)</strong>: check if alpha string or numeric.</li>
+                <li>
+                    <strong>A.isHexa()</strong>: check if it is hexadecimal number.</li>
+                <li>
+                    <strong>A.isUserName()</strong>: check if it is username.</li>
+                <li>
+                    <strong>A.isCommitMessage()</strong>: check if it is git commit message.</li>
+                <li>
+                    <strong>A.isGitBranch()</strong>: check if it is git name.</li>
+                <li>
+                    <strong>A.isIP()</strong>: check if ip address.</li>
+                <li>
+                    <strong>A.isMAC()</strong>: check if MAC address.</li>
+                <li>
+                    <strong>A.isURL()</strong>: check if is url.</li>
+                <li>
+                    <strong>A.isDomain()</strong>: check if is domain.</li>
+                <li>
+                    <strong>A.isHost()</strong>: check if is Host(domain/ip:port).</li>
+                <li>
+                    <strong>A.isPort()</strong>: check if is port.</li>
+                <li>
+                    <strong>A.isRandom(min, max, floor = false)</strong>: Randomize a number from min to max, floor is
+                    flag to cut to interger.</li>
+                <li>
+                    <strong>A.noneCheck()</strong>: don't/ignore check.</li>
+            </ul>
+            <p><em>note: when those function failed checked, it return undefined value.</em></p>
+            <hr>
+            <h3>
+                <a id="user-content-some-common-function-a-usually-used-to-interract-with-pipe-flow" class="anchor"
+                    href="#some-common-function-a-usually-used-to-interract-with-pipe-flow" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Some Common function A (usually used to interract with pipe flow).</h3>
+            <h4>
+                <a id="user-content-adjust-object" class="anchor" href="#adjust-object" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Adjust Object</h4>
+            <ul>
+                <li>
+                    <p><strong>A.mixObject: model : obj</strong> : create new object from obj defination, and verify
+                        with model (if specific).</p>
+                    <ul>
+                        - model: tên model đã định nghĩa (có thể có hoặc không có) </br>
+                        - obj: tạo ra một obj mới </br>
+                        - vd: </br>
+                        `A.mixObject: abc: ({ </br>
+                            "name" : "xyz", </br>
+                            "age"  : 22 </br>
+                        })` </br>
+                        - các key sau khi mixObject sẽ được gán vào body (body.name, body.age). Ta có thể gán vào biến như sau: </br>
+                        `A.mixObject > temp: abc: ({ </br>
+                            "name" : "xyz", </br>
+                            "age"  : 22 </br>
+                        })` </br>
+                        - Các key sẽ được gán vào biến temp (temp.name, temp.age) </br> 
+                        * TH không có model: </br>
+                        `A.mixObject:: ({ </br>
+                            "name" : "xyz", </br>
+                            "age"  : 22 </br>
+                        })`</br>
+                        - Kết quả trả về sẽ giống kết quả của obj gán cho từng key
+                        * TH có model:   </br>
+                        `A.mixObject: abc : ({ </br>
+                            "name" : "xyz", </br>
+                            "age"  : 22 </br>
+                        })`</br>
+                        - Phải đúng định dang của model đã định nghĩa kiểu dữ liệu và key tồn tại. Nếu không tồn tại key trong model sẽ bị triệt tiêu còn key không đúng kiểu dữ liệu sẽ cho kết quả undefined
+                    </ul>
+                </li>
+                <li>
+                    <p><strong>A.modifyObject: obj: ...keys</strong> : same as verifyInput, but dont use model verify.
+                    </p>
+                    
+                </li>
+                <li>
+                    <p><strong>A.shadowObject: ...objs</strong> : shadow one sub-key level all objs object.</p>
+                </li>
+                <li>
+                    <p><strong>A.mergeObject: obj0: ...obj1</strong> : merge one sub-key level all objN into obj0.</p>
+                </li>
+                <li>
+                    <p><strong>A.mergeFreeObject: obj0: ...obj1</strong> : merge all key, subkey in objN into obj0.</p>
+                </li>
+                <li>
+                    <p><strong>A.trimObject: obj: trimEmptyString=true: trimEmptyObject=true</strong> : remove all empty
+                        key-path value.</p>
+                </li>
+                <li>
+                    <p><strong>A.flatObject: obj: maxLevel=0</strong> : flat all object and sub object to one level
+                        array.</p>
+                </li>
+                <li>
+                    <p><strong>A.allKeyObject: obj: maxLevel=0</strong> : get all object/subobject (maxLevel &lt;= 0)
+                        key into an array.</p>
+                </li>
+                <li>
+                    <p><strong>A.allValueObject: obj: maxLevel=0</strong> : get all object/subobject (maxLevel &lt;= 0)
+                        value into an array.</p>
+                </li>
+                <li>
+                    <p><strong>A.selectObject: objs: keyPath: value: matchKeyName='match': restKeyName='rest'</strong> :
+                        select objs in array/pipeData by keyPath-value, return object.</p>
+                </li>
+                <li>
+                    <p><strong>A.groupObject: objs: keyPath: restKeyName=rest'</strong>: group objs in array/pipeData by
+                        keyPath-value, return object.</p>
+                </li>
+                <li>
+                    <p><strong>A.verifyObject: model: obj</strong> : verify object structure with defined model
+                        structure.</p>
+                </li>
+                <li>
+                    <p><strong>A.unifyObject: obj</strong> : Unified object for remove all duplicated object in array
+                        inside input object/pipeData.</p>
+                </li>
+                <li>
+                    <p><strong>A.uniquizedObject: obj</strong> : Uniquized all ObjectId string to ObjectId.</p>
+                </li>
+                <li>
+                    <p><strong>A.deUniquizedObject: obj</strong> : Deuniquized all ObjectId to ObjectId string.</p>
+                </li>
+                <li>
+                    <p><strong>A.transArrayToObject: keyPath: arrs</strong> : transform array to object by keypath.</p>
+                </li>
+            </ul>
+            <h4>
+                <a id="user-content-object-function" class="anchor" href="#object-function" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Object Function</h4>
+            <ul>
+                <li>
+                    <strong>A.getKObject: keyPath</strong> : get/gather object by keypath.</li>
+                <li>
+                    <strong>A.copyKObject: ... : fromkey, toKey : ...</strong> : copy key in object, unreturned result.
+                </li>
+                <li>
+                    <strong>A.moveKObject: ... : fromkey, toKey : ...</strong> : move key in object, unreturned result.
+                </li>
+                <li>
+                    <strong>A.deleteKObject: ...keyPaths</strong> : delete key in object, no result.</li>
+                <li>
+                    <strong>A.removeKObject: arrs: keySearch: matchedValue</strong> : delete object in arrs when
+                    keySearch matched with matchedValue, unreturned result.</li>
+                <li>
+                    <strong>A.cloneObject: fromKey: toKey</strong> : clone to new object.</li>
+            </ul>
+            <h4>
+                <a id="user-content-object-sort" class="anchor" href="#object-sort" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Object Sort</h4>
+            <ul>
+                <li>
+                    <strong>A.sortObject: obj: keyPath: ascending=true</strong> : Sort list array/object key obj as
+                    stringed-type item.</li>
+                <li>
+                    <strong>A.sortNumberObject: arrs: keyPath: ascending=true</strong> : Sort list array arrs as
+                    numbered-type item.</li>
+            </ul>
+            <h4>
+                <a id="user-content-object-condition" class="anchor" href="#object-condition" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Object Condition</h4>
+            <ul>
+                <li>
+                    <strong>A.assertObject: obj: typeAndOr: condictions: failedObject</strong> : assert value by
+                    condiction, type is only or/and operand, if the result is failed, flow will be stoped and return
+                    failedObject.</li>
+                <li>
+                    <strong>A.checkObject: obj: typeAndOr: condictions: successObject: failedObject</strong> : check the
+                    condictions with typeAndOr, then return successObject or failedObject matching with the result of
+                    checking.</li>
+                <li>
+                    <strong>A.caseObject: obj: ...optObjs</strong> : check the condiction matching with optObjs, optObj
+                    defined as pair of (value: object).</li>
+                <li>
+                    <strong>A.typeObject: obj: mustBeType</strong> : check object must be type such as: string, array,
+                    object, empty, emptyString, emptyArray, emptyObject, null, undefined, boolean, number, int/integer,
+                    float/double, date, exist.</li>
+            </ul>
+            <h4>
+                <a id="user-content-calculate" class="anchor" href="#calculate" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Calculate</h4>
+            <ul>
+                <li>
+                    <strong>A.calculate: ops: ...number</strong> : calculate the list param, ops is the operator param.
+                    -&gt; return number.</li>
+                <li>
+                    <strong>A.calculates: ops: ...numbers</strong> : calculate the list param, ops is the operator
+                    param. -&gt; return array.
+                    Operator should be, + - * / % ^ &lt;&lt; &gt;&gt; | max min ceil floor log exp sqrt rt.</li>
+            </ul>
+            <h4>
+                <a id="user-content-utilites" class="anchor" href="#utilites" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Utilites</h4>
+            <ul>
+                <li>
+                    <strong>A.generateUniqueID: randLength=48: embededString</strong> :</li>
+                <li>
+                    <strong>A.profilingStamp: name: timeIn</strong> : Calculate profiling time of a name.</li>
+                <li>
+                    <strong>A.printObject: fromKey: toKey</strong> : print object content to console, no result</li>
+                <li>
+                    <strong>A.jsScript: objContext: jsScript</strong> : Run script in context objContext global.</li>
+                <li>
+                    <strong>A.sleep: second</strong> : sleep in seconds.</li>
+                <li>
+                    <strong>A.pause:</strong> : pause application and wait for user action.</li>
+                <li>
+                    <strong>A.pipeRoute: pipeName</strong> : include another route by pipeName into this pipe line to
+                    run.</li>
+                <li>
+                    <strong>A.decodeControlLetter: pipeLineName</strong> : call another pipe function.</li>
+                <li>
+                    <strong>A.responseObject: code=200: obj={}: returnRaw=false: forceStop=false</strong> : Return
+                    object to client.</li>
+            </ul>
+            <h4>
+                <a id="user-content-string-function" class="anchor" href="#string-function" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>String Function</h4>
+            <ul>
+                <li>
+                    <strong>A.joinString: joinLetter: ...strings</strong> :</li>
+                <li>
+                    <strong>A.joinWrapString: joinLetter: BeforeLetter: AfterLetter: ...strings</strong> :</li>
+                <li>
+                    <strong>A.splitString: splitLetter: ...strings</strong> :</li>
+                <li>
+                    <strong>A.replaceString: stringParam: searchString: replaceString</strong> :</li>
+                <li>
+                    <strong>A.formatString: formatString: ...params</strong> : return format/replace string
+                    '{{index|name}}', return new string.</li>
+            </ul>
+            <h4>
+                <a id="user-content-role-feature-checking" class="anchor" href="#role-feature-checking"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Role, Feature Checking</h4>
+            <ul>
+                <li>
+                    <strong>A.checkPermission: model='role': idKeyName='roleId': ...permissionKeys</strong> : Check user
+                    role in Param.user[idKeyName] with list of permissionKeys.</li>
+                <li>
+                    <strong>A.checkRole: model: modelIdName: roleModel: ...keys</strong> : Check user access resource by
+                    role base.</li>
+                <li>
+                    <strong>A.checkFeature: model: modelIdName: ...keys</strong> : check the feature is enable or not.
+                </li>
+                <li>
+                    <strong>A.checkCompanyFeature: ...keys</strong> : check company feature enable or not.</li>
+                <li>
+                    <strong>A.getView: viewName: extras</strong> : get html view of a defination view.</li>
+            </ul>
+            <h4>
+                <a id="user-content-tree-cache" class="anchor" href="#tree-cache" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Tree Cache</h4>
+            <ul>
+                <li>
+                    <strong>A.setTreeCacheValue: group: keyPath: value: expired</strong> : set cached object in tree
+                    save-model.</li>
+                <li>
+                    <strong>A.getTreeCacheValue: group: keyPath: cached=true</strong> : get cached object in tree
+                    save-model.</li>
+            </ul>
+            <h4>
+                <a id="user-content-cache-object" class="anchor" href="#cache-object" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Cache Object</h4>
+            <ul>
+                <li>
+                    <strong>A.getDBCachedObject: modelName: id: unCached=false: exFilter</strong> : get cached object of
+                    from db object.</li>
+                <li>
+                    <strong>A.setCacheObject: model: key: obj: expired</strong> :</li>
+                <li>
+                    <strong>A.getCacheObject: model: key</strong> :</li>
+                <li>
+                    <strong>A.setKValue: key: val: expired</strong> :</li>
+                <li>
+                    <strong>A.getKValue: key</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-adjust-object-io" class="anchor" href="#adjust-object-io" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Adjust Object I/O</h4>
+            <ul>
+                <li>
+                    <strong>A.verifyInput: collectionName: ...keys</strong> : 'key-' to remove this key, 'key' or 'key+'
+                    to keep this result key, 'key!' to require user must sent to server. Used with model record-type
+                    verify.</li>
+                <li>
+                    <strong>A.refactorOutput: bodyData: ...keys</strong> : same as verifyInput param, but dont valid
+                    'key!'.</li>
+            </ul>
+            <h4>
+                <a id="user-content-database-raw-object" class="anchor" href="#database-raw-object"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Database Raw Object</h4>
+            <ul>
+                <li>
+                    <strong>A.getDBObject: colName: filter</strong> : get database object with filter.</li>
+                <li>
+                    <strong>A.setDBObject: colName: object</strong> : set new object into database.</li>
+                <li>
+                    <strong>A.updateDBObject: colName: object: keyName: mustCreate=false</strong> : update (or create
+                    new) object into database.</li>
+            </ul>
+            <h4>
+                <a id="user-content-insert-one" class="anchor" href="#insert-one" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Insert One</h4>
+            <ul>
+                <li>
+                    <strong>A.insertOne: collectionName: obj: hasReturn=true</strong> : insert item (obj or pipeData)
+                    into Database, hasReturn to return the created item from database.</li>
+                <li>
+                    <strong>A.insertOneWIndex: srcCollection: localField: foreignField: targetCollection: groupField:
+                        obj</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-insert-many" class="anchor" href="#insert-many" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Insert Many</h4>
+            <ul>
+                <li>
+                    <strong>A.insertMany: collectionName: objs</strong> : insert many items (objs or pipeData) into
+                    Database.</li>
+                <li>
+                    <strong>A.insertManyWIndex: srcCollection: localField: foreignField: targetCollection: groupField:
+                        objs</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-find-one" class="anchor" href="#find-one" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Find One</h4>
+            <ul>
+                <li>
+                    <strong>A.findById: collectionName: idKey='_id'</strong> : find item in database, idKey is key or
+                    object of object '$match' filter.</li>
+                <li>
+                    <strong>A.findByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
+                        routeTargetField</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-find-many" class="anchor" href="#find-many" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Find many</h4>
+            <ul>
+                <li>
+                    <strong>A.findMany: collectionName: key: groupByKey</strong> : find many items in database, key is
+                    key or object of object '$match' filter.</li>
+                <li>
+                    <strong>A.findManyWIndex: routeSrcField: foreignField: targetCollection: groupField</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-update-one" class="anchor" href="#update-one" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Update One</h4>
+            <ul>
+                <li>
+                    <strong>A.updateById: collectionName: idKey='_id': updateData={}: mergeOpt=false</strong> : update
+                    item in database, idKey is key of object '$match' filter.</li>
+                <li>
+                    <strong>A.updateByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
+                        routeTargetField: filterKey="_id", updatedData={}</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-update-many" class="anchor" href="#update-many" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Update Many</h4>
+            <ul>
+                <li>
+                    <strong>A.updateMany: collectionName: key='_id': updateData={}: mergeOpt=false</strong> : update
+                    many items in database, key is key of object '$match' filter</li>
+                <li>
+                    <strong>A.updateManyWIndex: routeSrcField: foreignField: targetCollection: groupField:
+                        routeTargetField: filterKey='_id': updateData={}</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-delete-one" class="anchor" href="#delete-one" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Delete One</h4>
+            <ul>
+                <li>
+                    <strong>A.deleteById: collectionName: idKey='_id': hardDelete=true</strong> : delete item in
+                    database, idKey is key of object '$match' filter.</li>
+                <li>
+                    <strong>A.deleteByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
+                        routeTargetField: hardDelete=true: filterKey='_id'</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-delete-many" class="anchor" href="#delete-many" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Delete Many</h4>
+            <ul>
+                <li>
+                    <strong>A.deleteMany: collectionName: key="_id": hardDelete=true</strong> : delete many items in
+                    database, key is key or object of object '$match' filter</li>
+                <li>
+                    <strong>A.deleteManyWIndex: routeSrcField: foreignField: targetCollection: groupField:
+                        routeTargetField: hardDelete=true: filterKey='_id'</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-finddelete-all" class="anchor" href="#finddelete-all" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Find/Delete All</h4>
+            <ul>
+                <li>
+                    <strong>A.findAll: collectionName</strong> : find all items in database collection;</li>
+                <li>
+                    <strong>A.deleteAll: collectionName</strong> : delete all items in database collection;</li>
+            </ul>
+            <h4>
+                <a id="user-content-mongo-commmon" class="anchor" href="#mongo-commmon" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Mongo Commmon</h4>
+            <ul>
+                <li>
+                    <strong>A.ID: id</strong> :</li>
+                <li>
+                    <strong>A.aggregate: collectionName: ... : queryCmds : ...</strong> :</li>
+                <li>
+                    <strong>A.populate: ... : collectionName: localField: foreignField='_id': '+/-': projectKeys :
+                        ...</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-mongo-commmon-1" class="anchor" href="#mongo-commmon-1" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Mongo Commmon</h4>
+            <ul>
+                <li>
+                    <strong>A.useAdminDB: useAdmin=true</strong> :</li>
+                <li>
+                    <strong>A.useDatabase: dbName='commondb'</strong> :</li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-file-api" class="anchor" href="#file-api" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>File API</h3>
+            <h4>
+                <a id="user-content-file-interract" class="anchor" href="#file-interract" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>File Interract</h4>
+            <ul>
+                <li>
+                    <strong>A.writeFile: filePath: fileContent: override=true</strong> :</li>
+                <li>
+                    <strong>A.readFile: filePath: mode='stream': defValue</strong> : read file in location.</li>
+                <li>
+                    <strong>A.pipeFile: filePath: defValue</strong> : pipe file from location ($Res/ : for Resource
+                    folder in root src).</li>
+                <li>
+                    <strong>A.readFolder: filePath: recursive=false</strong> : : or listFolder are same).</li>
+                <li>
+                    <strong>A.copyFile: fromPath: toPath: recursive=true: removeSource=false</strong> :</li>
+                <li>
+                    <strong>A.moveFile: fromPath: toPath: recursive=true</strong> :</li>
+                <li>
+                    <strong>A.deleteFile: fromPath: recursive=true</strong> :</li>
+                <li>
+                    <strong>A.fileInfor: fromPath: toPath</strong> :</li>
+                <li>
+                    <strong>A.checkFileExist: fromPath: isFile</strong> :</li>
+                <li>
+                    <strong>A.fileComponent: filepath</strong> : plit filepath to component (ext, name, base, path).
+                </li>
+            </ul>
+            <h4>
+                <a id="user-content-file-zip" class="anchor" href="#file-zip" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>File Zip</h4>
+            <ul>
+                <li>
+                    <strong>A.zipFile: fromPath: toPath: password=''</strong> :</li>
+                <li>
+                    <strong>A.unZipFile: fromPath: toPath: password=''</strong> :</li>
+            </ul>
+            <h4>
+                <a id="user-content-file-system" class="anchor" href="#file-system" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>File System</h4>
+            <ul>
+                <li>
+                    <strong>A.chmodFile: fromPath: mode: recursive=false</strong> :</li>
+                <li>
+                    <strong>A.chownFile: fromPath: user: group: recursive=false</strong> :</li>
+            </ul>
+            <hr>
+            <h4>
+                <a id="user-content-shell-system-script" class="anchor" href="#shell-system-script"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Shell System Script</h4>
+            <ul>
+                <li>
+                    <strong>A.shellExec: cmd: showLog=true</strong> : Run system command.</li>
+            </ul>
+            <hr>
+            <h4>
+                <a id="user-content-git-file-api" class="anchor" href="#git-file-api" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Git File API</h4>
+            <ul>
+                <li>
+                    <strong>A.gitShell: replaceObject: cmd: ...params</strong> : call git shell for checking push, pull.
+                </li>
+                <li>
+                    <strong>A.getKeyFinger: keyData</strong> : get SSH Finger from string, or file.</li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-cache-udp-sendmessage" class="anchor" href="#cache-udp-sendmessage"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Cache, UDP SendMessage</h3>
+            <ul>
+                <li>
+                    <strong>A.sendUDPMessage: udpData</strong> : send UDP message (string message) to host:port target,
+                    see udpData below.</li>
+                <li>
+                    <strong>A.sendMessage: udpData</strong> : same as A.sendUDPMessage:udpData, see udpData below.</li>
+                <li>
+                    <strong>A.quickSendUDP: ip: port</strong> : data: Quickly send UDP Message.</li>
+                <li>
+                    <strong>A.sendCacheMessage: msg: host: port: udpTypeVersion</strong> : send Cache message (string
+                    msg) to host:port target.</li>
+                <li>
+                    <strong>CacheParam.sendMessage: msg: host: port: udpTypeVersion</strong> : save as
+                    A.sendCacheMessage.</li>
+            </ul>
+            <pre><code>udpData = {
+data		: msg,
+ip		: host,
+port		: port,
+udp		: udpType,
+config		: config,
+sender		: fromSender,
+broadcast	: broadcast,
+compressed	: compressed
+}
+</code></pre>
+            <hr>
+            <h3>
+                <a id="user-content-password-function-let-enable-routecontrollerconfigimcodec-to-use-those-below-function"
+                    class="anchor"
+                    href="#password-function-let-enable-routecontrollerconfigimcodec-to-use-those-below-function"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Password function, let enable (route/controller).config.imCodec to use those below
+                function.</h3>
+            <ul>
+                <li>
+                    <strong>A.createPassword: password</strong> : create encoded password used to save to DB, return
+                    encoded string password.</li>
+                <li>
+                    <strong>A.checkPassword: password: encodedPassword</strong> : check password matched with encoded
+                    password.</li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-chat-send-message-let-enable-routecontrollerconfigimchat" class="anchor"
+                    href="#chat-send-message-let-enable-routecontrollerconfigimchat" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Chat send message, let enable (route/controller).config.imChat</h3>
+            <ul>
+                <li>
+                    <strong>Req.func.sendMessage: eventType: users: data</strong> : send chat message to specific list
+                    users Id.</li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-send-http-request-to-server" class="anchor" href="#send-http-request-to-server"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Send HTTP request to server</h3>
+            <ul>
+                <li>
+                    <strong>A.setReqTimeout: timeout</strong> : Set request timeout in second to extend duration of
+                    current connection.</li>
+                <li>
+                    <strong>A.sendDataSync: method: serverUrl: data: header: callback</strong> : send message to server
+                    URL, using with sync/await or callback still support both. Remember enable imHTTP config.</li>
+                <li>
+                    <strong>A.downloadRangeData: method: serverUrl: data: header: type='json'</strong> :</li>
+                <li>
+                    <strong>A.handleBodyData: config</strong> : handle request body (auto parse).</li>
+                <li>
+                    <strong>A.parseBodyData: config: header</strong> : parse request body.</li>
+                <li>
+                    <strong>A.setCookie: obj: hasEncoded=true</strong> : setcookie value to response to client.</li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-send-sms-mail-function" class="anchor" href="#send-sms-mail-function"
+                    aria-hidden="true"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16"
+                        height="16" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Send SMS, Mail function</h3>
+            <ul>
+                <li>
+                    <strong>A.sendSMS: from: to: content</strong> : Send SMS to a phone number via esms.vn service
+                    provider.</li>
+                <li>
+                    <strong>A.sendVoiceSMS: from: to: code</strong> : Send Voice SMS to a phone number via esms.vn
+                    service provider.</li>
+                <li>
+                    <strong>A.sendMultiMail: mailData: mailToList: mailToKey='email': sendIntact=false</strong> : Send
+                    mail to multiple users with process template for every user in mailToList.</li>
+                <li>
+                    <strong>A.sendMail: mailData: sendIntact</strong> : send mail, it cache on database, then send via
+                    mail queue.
+                    <ul>
+                        <li>ref: sender: <a
+                                href="https://github.com/guileen/node-sendmail/blob/master/examples/attachmentFile.js">https://github.com/guileen/node-sendmail/blob/master/examples/attachmentFile.js</a>
+                        </li>
+                        <li>ref: transport: <a href="https://nodemailer.com/message/"
+                                rel="nofollow">https://nodemailer.com/message/</a>
+                        </li>
+                        <li>ref: transport: <a href="https://nodemailer.com/message/attachments/"
+                                rel="nofollow">https://nodemailer.com/message/attachments/</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-push-message" class="anchor" href="#push-message" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Push Message</h3>
+            <ul>
+                <li>
+                    <strong>Req.func.pushMessage: listUsers: data: sendIntact</strong> : send FCM push notification to
+                    list of userId or device FCM token.
+                    <ul>
+                        <li>ref: <a href="https://firebase.google.com/docs/cloud-messaging/concept-options"
+                                rel="nofollow">https://firebase.google.com/docs/cloud-messaging/concept-options</a>
+                        </li>
+                        <li>ref: <a href="https://firebase.google.com/docs/cloud-messaging/http-server-ref"
+                                rel="nofollow">https://firebase.google.com/docs/cloud-messaging/http-server-ref</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <hr>
+            <h3>
+                <a id="user-content-doing-agent-task" class="anchor" href="#doing-agent-task" aria-hidden="true"><svg
+                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
+                        </path>
+                    </svg></a>Doing Agent Task</h3>
+            <ul>
+                <li>
+                    <strong>A.startAgentTask: reqObj: config</strong> : start doing Agent command task.</li>
+            </ul>
+
+        </div>
+
+        <div id="wiki-footer" class="mt-5 muted-link wiki-footer">
+            <a class="d-block p-3 muted-link text-center border border-dashed rounded-1"
+                href="/vantoan8x/GAM-Public-Training/wiki/_new?wiki%5Bname%5D=_Footer">
+                <svg class="octicon octicon-plus mr-1" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                    aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 2a.75.75 0 01.75.75v4.5h4.5a.75.75 0 010 1.5h-4.5v4.5a.75.75 0 01-1.5 0v-4.5h-4.5a.75.75 0 010-1.5h4.5v-4.5A.75.75 0 018 2z">
+                    </path>
+                </svg> Add a custom footer
+            </a> </div>
+    </div>
+</body>
+
+</html>
