@@ -193,41 +193,60 @@
                 <li>
                     <p><strong>A.mixObject: model : obj</strong> : create new object from obj defination, and verify
                         with model (if specific).</p>
-                    <ul>
-                        - model: tên model đã định nghĩa (có thể có hoặc không có) </br>
-                        - obj: tạo ra một obj mới </br>
-                        - vd: </br>
-                        `A.mixObject: abc: ({ </br>
-                            "name" : "xyz", </br>
-                            "age"  : 22 </br>
-                        })` </br>
-                        - các key sau khi mixObject sẽ được gán vào body (body.name, body.age). Ta có thể gán vào biến như sau: </br>
-                        `A.mixObject > temp: abc: ({ </br>
-                            "name" : "xyz", </br>
-                            "age"  : 22 </br>
-                        })` </br>
-                        - Các key sẽ được gán vào biến temp (temp.name, temp.age) </br> 
-                        * TH không có model: </br>
-                        `A.mixObject:: ({ </br>
-                            "name" : "xyz", </br>
-                            "age"  : 22 </br>
-                        })`</br>
-                        - Kết quả trả về sẽ giống kết quả của obj gán cho từng key
-                        * TH có model:   </br>
-                        `A.mixObject: abc : ({ </br>
-                            "name" : "xyz", </br>
-                            "age"  : 22 </br>
-                        })`</br>
-                        - Phải đúng định dang của model đã định nghĩa kiểu dữ liệu và key tồn tại. Nếu không tồn tại key trong model sẽ bị triệt tiêu còn key không đúng kiểu dữ liệu sẽ cho kết quả undefined
-                    </ul>
+                    - model: tên model đã định nghĩa (có thể có hoặc không có) </br>
+                    - obj: tạo ra một obj mới </br></br> 
+                    VD: </br> </br>
+                    `A.mixObject: abc: ({ </br>
+                        "name" : "xyz", </br>
+                        "age"  : 22 </br>
+                    })` </br> </br>
+                    Các key sau khi mixObject sẽ được gán vào body (body.name, body.age). Ta có thể gán vào biến như sau: </br> </br>
+                    `A.mixObject > temp: abc: ({ </br>
+                        "name" : "xyz", </br>
+                        "age"  : 22 </br>
+                    })` </br></br>
+                    Các key sẽ được gán vào biến temp (temp.name, temp.age) </br> </br>
+                    - TH không có model: </br>
+                    `A.mixObject:: ({ </br>
+                        "name" : "gitgam", </br>
+                        "age"  : 22 </br>
+                    })`</br></br>
+                    Kết quả trả về sẽ giống kết quả của obj gán cho từng key </br></br>
+                    - TH có model:   </br>
+                    `A.mixObject: abc : ({ </br>
+                        "name" : "xyz",
+                        "age"  : 22 </br>
+                    })`</br></br>
+                    Phải đúng định dạng của model đã định nghĩa kiểu dữ liệu và key tồn tại. Nếu không tồn tại key trong model sẽ bị triệt tiêu còn key không đúng kiểu dữ liệu sẽ cho kết quả undefined
                 </li>
                 <li>
                     <p><strong>A.modifyObject: obj: ...keys</strong> : same as verifyInput, but dont use model verify.
                     </p>
-                    
+                    - obj: tên ojb cần truyền key vào mặc định là body </br>
+                    - ... keys: định nghĩa key và giá trị cho từng key </br> </br>
+                    VD: </br> </br>
+                    `A.modifyObject:: 
+                        "name" = ("gitgam"),
+                        "address" = ("Xa Lo Ha Noi")`
+                    </br> </br>
+                    Các key sẽ được lần lượt gán vào body (body.name, body.address) và có gía trị tương ứng</br>
+                    * Lưu ý: nên để value vào (). </br></br>
+                    Có thể rán gì trị vào cả route, header, ...  </br></br>
+                    VD: </br>
+                    `A.modifyObject(*): P.route: 
+                        "name" = ("gitgam"),
+                        "address" = ("Xa Lo Ha Noi")`
                 </li>
                 <li>
                     <p><strong>A.shadowObject: ...objs</strong> : shadow one sub-key level all objs object.</p>
+                    `A.shadowObject > respData`
+                    </br>
+                    shadow sang obj respData (mặc định là body).
+                    </br></br>
+                    `A.shadowObject(xyz) > respData`
+                    </br>
+                    shadow obj xyz sang respData
+
                 </li>
                 <li>
                     <p><strong>A.mergeObject: obj0: ...obj1</strong> : merge one sub-key level all objN into obj0.</p>
@@ -371,19 +390,42 @@
             <ul>
                 <li>
                     <strong>A.generateUniqueID: randLength=48: embededString</strong> :</li>
+                    `A.generateUniqueID` <br/>
+                    
+                    result: base35302bf59359c211aaf180b051a25776d334c1b02641c39bfyboz12d0cd3n50576ea018
                 <li>
                     <strong>A.profilingStamp: name: timeIn</strong> : Calculate profiling time of a name.</li>
                 <li>
                     <strong>A.printObject: fromKey: toKey</strong> : print object content to console, no result</li>
+                    in obj ra màn hình <br>
+                    `A.printObject` // in body <br>
+                    `A.printObject(*)` // in tất cả dữ liệu từ client gửi lên <br>
+                    `A.printObject(*): P.route` // in route <br>
+                    `A.printObject(*): P.header` // in header <br>
+                    ...
                 <li>
                     <strong>A.jsScript: objContext: jsScript</strong> : Run script in context objContext global.</li>
-                <li>
-                    <strong>A.sleep: second</strong> : sleep in seconds.</li>
+                    Viết câu lệnh thực thi jsScript <br>
+                    `A.jsScript::( <br>
+                        if(!pipeData) { <br>
+                             return {"respData": "pipeData does not exist", "respReturn": true, "respCode": 404}; <br>
+                        } <br>
+                         return pipeData; <br>
+                    )`, <br>
+                    - respData: trả data về client <br>
+                    - respReturn: dừng tại đây <br>
+                    - respCode: trả code về client <br><br>
+                    
+                    <strong>A.sleep: second</strong> : sleep in seconds.</li> <br>
+                    `A.sleep: 10` (mặc định 1 giây) <br><br>
                 <li>
                     <strong>A.pause:</strong> : pause application and wait for user action.</li>
                 <li>
                     <strong>A.pipeRoute: pipeName</strong> : include another route by pipeName into this pipe line to
                     run.</li>
+                    - pipeName : tên của route cần chạy<br>
+                    `A.pipeRoute: user` <br>
+
                 <li>
                     <strong>A.decodeControlLetter: pipeLineName</strong> : call another pipe function.</li>
                 <li>
@@ -517,6 +559,12 @@
                 <li>
                     <strong>A.insertOne: collectionName: obj: hasReturn=true</strong> : insert item (obj or pipeData)
                     into Database, hasReturn to return the created item from database.</li>
+
+                    - collectionName: tên collectionName để ghi giá trị vào </br>
+                    - obj: dữ liệu để ghi vào  collectionName (mặc định lấy ở body) </br> </br>
+                    `A.insertOne: user` // lấy dữ liệu ở body để ghi vào </br>
+                    `A.insertOne: user: guest`// lấy dữ liệu guest để ghi vào </br> </br>
+                    
                 <li>
                     <strong>A.insertOneWIndex: srcCollection: localField: foreignField: targetCollection: groupField:
                         obj</strong> :</li>
@@ -533,6 +581,8 @@
                 <li>
                     <strong>A.insertMany: collectionName: objs</strong> : insert many items (objs or pipeData) into
                     Database.</li>
+                    Tương tự như A.insertOne </br>
+                    `A.insertMany: user: user` </br></br>
                 <li>
                     <strong>A.insertManyWIndex: srcCollection: localField: foreignField: targetCollection: groupField:
                         objs</strong> :</li>
@@ -549,6 +599,9 @@
                 <li>
                     <strong>A.findById: collectionName: idKey='_id'</strong> : find item in database, idKey is key or
                     object of object '$match' filter.</li>
+                    `A.findById: user` // tìm kiếm theo _id <br/>
+                    `A.findById: user: email` // tìm kiếm theo email <br/> 
+                    `A.findOne` tương tự như vậy 
                 <li>
                     <strong>A.findByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField</strong> :</li>
@@ -566,6 +619,7 @@
                     <strong>A.findMany: collectionName: key: groupByKey</strong> : find many items in database, key is
                     key or object of object '$match' filter.</li>
                 <li>
+                    `A.findMany(filter): user` //find theo điều kiện của fillter
                     <strong>A.findManyWIndex: routeSrcField: foreignField: targetCollection: groupField</strong> :</li>
             </ul>
             <h4>
@@ -583,7 +637,7 @@
                 <li>
                     <strong>A.updateByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: filterKey="_id", updatedData={}</strong> :</li>
-            </ul>
+            </ul>tương tự như vậy 
             <h4>
                 <a id="user-content-update-many" class="anchor" href="#update-many" aria-hidden="true"><svg
                         class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
