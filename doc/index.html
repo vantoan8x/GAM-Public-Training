@@ -618,9 +618,11 @@
                 <li>
                     <strong>A.findMany: collectionName: key: groupByKey</strong> : find many items in database, key is
                     key or object of object '$match' filter.</li>
-                <li>
-                    `A.findMany(filter): user` //find theo điều kiện của fillter
-                    <strong>A.findManyWIndex: routeSrcField: foreignField: targetCollection: groupField</strong> :</li>
+                    `A.findMany(filter): user` //find theo điều kiện của fillter </br> </br>
+                    Hoặc filter theo trường trong filter   </br>
+                    `A.findMany(filter): user: filter._id`   </br> </br>
+                    <li>
+                    <strong>A.findManyWIndex: routeSrcField: foreignField: targetCollection: groupField</strong> :</li> </br>
             </ul>
             <h4>
                 <a id="user-content-update-one" class="anchor" href="#update-one" aria-hidden="true"><svg
@@ -637,7 +639,7 @@
                 <li>
                     <strong>A.updateByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: filterKey="_id", updatedData={}</strong> :</li>
-            </ul>tương tự như vậy 
+            </ul>
             <h4>
                 <a id="user-content-update-many" class="anchor" href="#update-many" aria-hidden="true"><svg
                         class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
