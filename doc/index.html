@@ -332,10 +332,30 @@
             <ul>
                 <li>
                     <strong>A.sortObject: obj: keyPath: ascending=true</strong> : Sort list array/object key obj as
-                    stringed-type item.</li>
+                    stringed-type item.</li></br>
+                    
+                    * Lưu ý: Chỉ sắp xếp mảng hoặc object có kiểu string</br>
+                    VD: </br>
+                    - Sắp xếp tên theo thứ tự a-z</br>
+                    `A.sortObject:: name: true` (mặc định là true nên có thể truyền hoặc không truyền đều được)</br>
+                    - Sắp xếp tên theo thứ tự z-a</br>
+                    `A.sortObject:: name: false`</br></br>
+                    
                 <li>
                     <strong>A.sortNumberObject: arrs: keyPath: ascending=true</strong> : Sort list array arrs as
-                    numbered-type item.</li>
+                    numbered-type item.</li></br>
+
+                    * Lưu ý: Cách làm tương tự như a.sortObject nhưng chỉ sắp xếp mảng hoặc object có kiểu number</br>
+                    VD: </br>
+                    - Sắp xếp tuổi theo thứ tự tăng dần</br>
+                    `A.sortNumberObject:: age: true` (mặc định là true nên có thể truyền hoặc không truyền đều được)</br>
+                    - Sắp xếp tuổi theo thứ tự giảm dần</br>
+                    `A.sortNumberObject:: age: false`</br></br>
+
+                    * Đối với trường hợp nếu muốn sắp xếp 1 mảng con (arrayA) nằm trong mảng lớn (arrayB):</br>
+                    - Ví dụ sắp xếp tên trong mảng con (arrayA) nằm trong mảng cha (arrayB) theo thứ tự a-z</br>
+                    `A.sortObject(arrayB):: name: true`</br>
+                    - A.sortNumberObject cũng làm tương tự.</br>
             </ul>
             <h4>
                 <a id="user-content-object-condition" class="anchor" href="#object-condition" aria-hidden="true"><svg
@@ -531,9 +551,46 @@
                     <strong>A.verifyInput: collectionName: ...keys</strong> : 'key-' to remove this key, 'key' or 'key+'
                     to keep this result key, 'key!' to require user must sent to server. Used with model record-type
                     verify.</li>
+                    - A.verifyInput: kiểm tra các keys có đúng định dạng qui định từ model hay không, nếu đúng thì trả giá trị về client hoặc tiếp tục thực thi lệnh kế tiếp. </br>
+                    - collectionName: tên collectionName để ghi giá trị vào </br>
+                    - ... keys: định nghĩa key và giá trị cho từng key </br> </br>
+
+                    VD: </br>
+                    - collectionName: demo </br>
+                    - keys: name, age, ... </br>
+
+                    `A.verifyInput: demo: ...` // trả về tất cả các key đúng định dạng, những key sai định dạng sẽ trả về client code 500, những key không tồn tại ở model sẽ bị loại trừ. </br>
+                    `A.verifyInput: demo: name!, ...` // bắt buộc body phải truyền key name vào, các key khác có hay không đều được. </br>
+                    `A.verifyInput: demo: name-, ...` // không cần trả về client key name, các key khác vẫn trả bình thường. </br>
+                    `A.verifyInput: demo: name+` // chỉ trả về một key name nhưng không bắt buột, có hoặc không truyền đều được. </br>
+                    + Lưu ý: 'key+' hoàn toàn giống với 'key'. </br> </br>
                 <li>
                     <strong>A.refactorOutput: bodyData: ...keys</strong> : same as verifyInput param, but dont valid
                     'key!'.</li>
+
+                    - A.refactorOutput: tương tự như A.verifyInput nhưng các key không cần phải đúng định dạng qui định từ modal. </br>
+                    - bodyData: là body mà server trả về.   </br>
+                    - ... keys: định nghĩa key và giá trị cho từng key </br> </br>
+
+                    VD:
+                    - TH1: client chưa có data </br>
+                    `A.mixObject::({ </br>
+                        "name" : "gitgam", </br>
+                        "age"  : 10 </br>
+                    }) </br>
+                    `A.refactorOutput: ...` // trả về client tất cả các key có trong object. </br>
+                    `A.refactorOutput: name-, ...` // không trả về  giá trị key name, còn lại các key khác trả về bình thường. </br>
+                    `A.refactorOutput: name` // chỉ trả về  giá trị một key name. </br> </br>
+                    
+                    -TH2: client đã có data </br>
+                    * Đối với trường hợp này, khi ta thêm mới dữ liệu vào data, ta phải gán các giá trị mới vào một biến x (tên biến tùy ý). </br>
+                    `A.mixObject > x::({ </br>
+                        "hobbies" : "playing game" </br>
+                    }) </br>
+                    * Nếu không gán giá trị mới vào x thì A.refactorOutput chạy chỉ trả về giá trị của các key mới còn key cũ thì không. </br>
+                    `A.refactorOutput: ...` // trả về client tất cả các key cũ đã có và key mới được thêm. </br>
+                    `A.refactorOutput: x.name-, ...` // không trả về  giá trị key name, còn lại các key khác trả về bình thường. </br>
+                    `A.refactorOutput: x.name` // chỉ trả về  giá trị một key name. </br>
             </ul>
             <h4>
                 <a id="user-content-database-raw-object" class="anchor" href="#database-raw-object"
