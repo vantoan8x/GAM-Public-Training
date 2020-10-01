@@ -465,6 +465,11 @@
                 <li>
                     <strong>A.checkPermission: model='role': idKeyName='roleId': ...permissionKeys</strong> : Check user
                     role in Param.user[idKeyName] with list of permissionKeys.</li>
+                    - model: tên của model mặc định là role
+                    - idKeyName: id của role cần check 
+                    - ...permissionKeys: view, edit, delete, create, ...
+                    VD: 
+                    `A.checkPermission(*): role: P.role._id: user.view: user.edit` 
                 <li>
                     <strong>A.checkRole: model: modelIdName: roleModel: ...keys</strong> : Check user access resource by
                     role base.</li>
@@ -636,7 +641,13 @@
                 <li>
                     <strong>A.updateById: collectionName: idKey='_id': updateData={}: mergeOpt=false</strong> : update
                     item in database, idKey is key of object '$match' filter.</li>
-                <li>
+                <li> </br>
+                    - collectionName: tên collectionName cần ghi vào </br>
+                    - idKey: key cần được update mặc định là _id (mặc định là _id ở route) </br>
+                    - updateData: data cần update (mặc định là body gửi lên) </br>
+                    - mergeOpt: mặc định là false  </br>
+                    VD:  </br>
+                    `A.updateById:user` </br>
                     <strong>A.updateByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: filterKey="_id", updatedData={}</strong> :</li>
             </ul>
@@ -652,7 +663,10 @@
                 <li>
                     <strong>A.updateMany: collectionName: key='_id': updateData={}: mergeOpt=false</strong> : update
                     many items in database, key is key of object '$match' filter</li>
-                <li>
+           
+                    Tương tự như updateById <br>
+                    VD: `A.update: user: filter`<br>
+                    <li>
                     <strong>A.updateManyWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: filterKey='_id': updateData={}</strong> :</li>
             </ul>

@@ -1,0 +1,13 @@
+{
+	"name": "demo",
+	"version": "0.0.1",
+	"description": "GStart Project",
+	"main": "gstart",
+	"scripts": {
+		"start": "gstart ./"
+	},
+	"dependencies": {
+		"mongodb": "^3.6.2",
+		"redis": "^3.0.2"
+	}
+}

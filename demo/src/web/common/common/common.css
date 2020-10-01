@@ -1,0 +1,16 @@
+body {
+  padding: 0px !important;
+  margin: 0px !important;
+  border: solid white 0px !important;
+  background: white;
+}
+
+div,
+a,
+img,
+input {
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+  outline: 0px transparent !important;
+}
