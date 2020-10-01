@@ -197,15 +197,15 @@
                     - obj: tạo ra một obj mới </br></br> 
                     VD: </br> </br>
                     `A.mixObject: abc: ({ </br>
-                        "name" : "xyz", </br>
+                        "name" : "gitgam", </br>
                         "age"  : 22 </br>
                     })` </br> </br>
                     Các key sau khi mixObject sẽ được gán vào body (body.name, body.age). Ta có thể gán vào biến như sau: </br> </br>
                     `A.mixObject > temp: abc: ({ </br>
-                        "name" : "xyz", </br>
+                        "name" : "gitgam", </br>
                         "age"  : 22 </br>
                     })` </br></br>
-                    Các key sẽ được gán vào biến temp (temp.name, temp.age) </br> </br>
+                    Các key sẽ được gán vào body.temp (temp.name, temp.age) </br> </br>
                     - TH không có model: </br>
                     `A.mixObject:: ({ </br>
                         "name" : "gitgam", </br>
@@ -214,7 +214,7 @@
                     Kết quả trả về sẽ giống kết quả của obj gán cho từng key </br></br>
                     - TH có model:   </br>
                     `A.mixObject: abc : ({ </br>
-                        "name" : "xyz",
+                        "name" : "gitgam",
                         "age"  : 22 </br>
                     })`</br></br>
                     Phải đúng định dạng của model đã định nghĩa kiểu dữ liệu và key tồn tại. Nếu không tồn tại key trong model sẽ bị triệt tiêu còn key không đúng kiểu dữ liệu sẽ cho kết quả undefined
@@ -738,7 +738,12 @@
             <ul>
                 <li>
                     <strong>A.deleteById: collectionName: idKey='_id': hardDelete=true</strong> : delete item in
-                    database, idKey is key of object '$match' filter.</li>
+                    database, idKey is key of object '$match' filter.</li> </br>
+                    - collectionName : tên collection cần delete</br>
+                    - idKey: mặc định là _id route, body</br></br>
+                    hardDelete: mặc định là true (true: xóa hẳn khỏi db false: ẩn)
+                    VD: </br>
+                    `A.deleteById: test` // A.deleteOne sử dụng tương tự
                 <li>
                     <strong>A.deleteByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: hardDelete=true: filterKey='_id'</strong> :</li>
@@ -754,7 +759,11 @@
             <ul>
                 <li>
                     <strong>A.deleteMany: collectionName: key="_id": hardDelete=true</strong> : delete many items in
-                    database, key is key or object of object '$match' filter</li>
+                    database, key is key or object of object '$match' filter</li> </br>
+                    Tương tự như deleteById </br>
+                    VD: </br>
+                    `A.deleteMany(filter): test` // delete những document giống với cái trường ở filter</br>
+                    
                 <li>
                     <strong>A.deleteManyWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: hardDelete=true: filterKey='_id'</strong> :</li>
@@ -770,8 +779,12 @@
             <ul>
                 <li>
                     <strong>A.findAll: collectionName</strong> : find all items in database collection;</li>
+                    VD: </br>
+                    `A.findAll: user` // Tìm tất cả các document có trong collection </br>
                 <li>
                     <strong>A.deleteAll: collectionName</strong> : delete all items in database collection;</li>
+                    VD: </br>
+                    `A.deleteAll: user` // Xóa tất cả các document có trong collection </br>
             </ul>
             <h4>
                 <a id="user-content-mongo-commmon" class="anchor" href="#mongo-commmon" aria-hidden="true"><svg
