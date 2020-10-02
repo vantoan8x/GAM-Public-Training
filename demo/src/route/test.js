@@ -15,6 +15,57 @@ const TestRoute = {
 	}
 };
 
+// joinString
+TestRoute.POST.push([["/joinString"], [
+	`A.printObject`,
+	`A.formatString: abc\\n{{name}}^TB^TABnumber {{name2}}`,
+	`A.printObject`
+]]);
+
+// A.assertObject
+TestRoute.POST.push([["/assertObject"], [
+	`A.mixObject :: ({
+		 "num" : 2
+	})`,
+
+	// Kiểm tra existUser có tồn tại kh	ông nếu tồn tại thì tiếp tục chạy các hàm bên dưới
+	`A.assertObject:::(
+		num == 1,
+	)
+	:({
+		"Value" : "Không phù hợp với điều kiện"
+	})`,
+	`A.printObject`
+]]);
+
+// A.checkObject
+TestRoute.POST.push([["/checkObject"], [
+	`A.mixObject :: ({
+		 "num" :11
+	})`,
+	`A.checkObject:::(
+		num > 10,
+	)
+	:({
+		"Result" : "Lớn hơn 10"
+	})
+	:({
+		"Result" : "Nhỏ hơn 10"
+	})`,
+	`A.printObject`
+]]);
+// caseObject
+TestRoute.POST.push([["/caseObject"], [
+	`A.caseObject: @num:
+	1: ({"value" : "abc"}):
+	2: ({"value" : "def"}):
+	3: ({"value" : "asd"}):`
+]]);
+// typeObject
+TestRoute.POST.push([["/typeObject"], [
+	`A.typeObject: name: int`,
+
+]]);
 // sortObject
 TestRoute.GET.push([["/sort"], [
 	// Tìm _id ở route để delete
@@ -105,7 +156,5 @@ TestRoute.DELETE.push([[":_id"], [
 	// Tìm _id ở route để delete
 	`A.deleteById: test`
 ]]);
-
-
 
 module.exports = TestRoute;

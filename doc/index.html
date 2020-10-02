@@ -370,17 +370,54 @@ opsops<!DOCTYPE html>
                     <strong>A.assertObject: obj: typeAndOr: condictions: failedObject</strong> : assert value by
                     condiction, type is only or/and operand, if the result is failed, flow will be stoped and return
                     failedObject.</li>
+                    - typeAndOr: sử dụng and hoặc or cho các điều </br>
+                    - condictions: điều kiện để tiếp tục thực thi </br>
+                    - failedObject: kết quả faile trả về cho client </br>
+                    VD:
+                        `A.assertObject:::( </br>
+                            num == 1, </br>
+                        ) </br>
+                        :({ </br>
+                            "Value" : "Không phù hợp với điều kiện" </br>
+                        })`, </br>
+                        `A.printObject` </br>
+                    Kiểm tra num có bằng 1 không nếu bằng 1 thì thực thi printObject nếu không bằng thì trả client code : 500, value "Không phù hợp với điều kiện" </br>
+                    Toán tử: <>, !=, < , > , <=, >=, ==, ===, !==, not-regex, regex, not-as, as, not-in, in </br> 
                 <li>
                     <strong>A.checkObject: obj: typeAndOr: condictions: successObject: failedObject</strong> : check the
                     condictions with typeAndOr, then return successObject or failedObject matching with the result of
                     checking.</li>
+                    - typeAndOr: sử dụng and hoặc or cho các điều </br>
+                    - condictions: điều kiện để tiếp tục thực thi </br>
+                    - successObject: xử lý khi điều kiện đúng </br>
+                    - failedObject: xủ lý khi điều kiện sai </br>
+                    VD:
+                    `A.checkObject:::( </br>
+                        num > 10,</br>
+                    ) </br>
+                    :({ </br>
+                        "Result" : "Lớn hơn 10" </br>
+                    }) </br>
+                    :({ </br>
+                        "Result" : "Nhỏ hơn 10" </br>
+                    })`, </br>
+                    Sử dụng giống câu lệnh if else </br>
                 <li>
                     <strong>A.caseObject: obj: ...optObjs</strong> : check the condiction matching with optObjs, optObj
                     defined as pair of (value: object).</li>
+                    VD: </br>
+                    `A.caseObject: @num: </br>
+                    1: ({"value" : "abc"}): </br>
+                    2: ({"value" : "def"}): </br>
+                    3: ({"value" : "asd"}):` </br>
+                    Sử dụng tương tự như switch case </br>
                 <li>
                     <strong>A.typeObject: obj: mustBeType</strong> : check object must be type such as: string, array,
                     object, empty, emptyString, emptyArray, emptyObject, null, undefined, boolean, number, int/integer,
                     float/double, date, exist.</li>
+                    mustBeType: kiểu dưng liệu cần kiểm tra (string, array, object, empty, emptyString, emptyArray, emptyObject, null, undefined, boolean, number, int/integer, float/double, date, exist) </br>
+                    VD: </br>
+                    `A.typeObject: @name: int`, </br>
             </ul>
             <h4>
                 <a id="user-content-calculate" class="anchor" href="#calculate" aria-hidden="true"><svg
