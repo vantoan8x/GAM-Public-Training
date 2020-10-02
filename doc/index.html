@@ -307,19 +307,33 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.getKObject: keyPath</strong> : get/gather object by keypath.</li>
+                    - Tìm kiếm một đối tượng nào đó trong mảng.
+                    VD:
+                    `A.getKObject: name` // trả về giá trị của key name.
                 <li>
                     <strong>A.copyKObject: ... : fromkey, toKey : ...</strong> : copy key in object, unreturned result.
+                    - Sao chép giá trị đối tượng này gán vào cho đối tượng khác.
+                    VD: 
+                    `A.copyKObject: nameA, nameB` // cả hai key nameA và nameB đều có giá trị giống nhau.
                 </li>
                 <li>
                     <strong>A.moveKObject: ... : fromkey, toKey : ...</strong> : move key in object, unreturned result.
+                    - Di chuyển giá trị của key này sang key khác, key được di chuyển không còn giá trị nữa.
+                    VD:
+                    `A.moveKObject: nameA, nameB` // nameB có giá trị của nameA, nhưng name A không tồn tại giá trị nào nữa.
                 </li>
                 <li>
                     <strong>A.deleteKObject: ...keyPaths</strong> : delete key in object, no result.</li>
+                    - Xóa một key trong đối tượng nào đó.
+                    VD: 
+                    `A.deleteKObject: name` // xóa key name.
                 <li>
                     <strong>A.removeKObject: arrs: keySearch: matchedValue</strong> : delete object in arrs when
                     keySearch matched with matchedValue, unreturned result.</li>
+                    - Tương tự như deleteKObject nhưng phải kèm theo value để xác định chính xác đối tượng cần xóa.
                 <li>
                     <strong>A.cloneObject: fromKey: toKey</strong> : clone to new object.</li>
+                    - Tương tự như A.copyKObject
             </ul>
             <h4>
                 <a id="user-content-object-sort" class="anchor" href="#object-sort" aria-hidden="true"><svg
