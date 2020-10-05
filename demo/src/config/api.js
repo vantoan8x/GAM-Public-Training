@@ -1,5 +1,6 @@
 const Api = {
-	Enable	: true
+	Enable	: true,
+	DataPath: "/var/abc"
 }
 
 module.exports = Api;

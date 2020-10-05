@@ -5,9 +5,8 @@ const TestModel = {
     allKeys: [],
 
     validator: {
-        name    : `A.isString`,
-        age     : `A.isNumber`,
-        address : `A.isString`
+        _id    : `A.isNumber`,
+        infor  : `A.isObject`
     },
 };
 

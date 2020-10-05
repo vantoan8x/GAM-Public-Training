@@ -12,13 +12,102 @@ const TestRoute = {
 		unAuth: true,
 		profiling: true,
 		IgnoreModifiedAt: true,
+		imCache: true,
+
 	}
 };
 
+// mergeObject
+TestRoute.POST.push([["/mergeobject"], [
+	`A.mergeObject: @obj1: @obj2: @obj3`,
+	`A.printObject`
+
+]]);
+
+// trimObject
+TestRoute.POST.push([["/trimobject"], [
+	`A.trimObject: @name`,
+	`A.printObject`
+
+]]); 
+
+// flatObject
+TestRoute.POST.push([["/flatobject"], [
+	`A.allValueObject: @name: 0`,
+	`A.printObject`
+
+]]); 
+
+// createPassword
+TestRoute.POST.push([["/createpassword"], [
+	`A.checkPassword: password: pass`
+
+]]);
 // joinString
 TestRoute.POST.push([["/joinString"], [
 	`A.printObject`,
 	`A.formatString: abc\\n{{name}}^TB^TABnumber {{name2}}`,
+	`A.printObject`
+]]);
+// writeFile
+TestRoute.POST.push([["/writeFile"], [
+	`A.writeFile: @filePath: @fileContent: @mode`,
+	`A.printObject`
+]]);
+
+// zipFile
+TestRoute.POST.push([["/zipFile"], [
+	`A.zipFile: @fromPath: @toPath: @password `
+]]);
+
+
+// calculate
+TestRoute.POST.push([["/calculate"], [
+	`A.calculates: -: @a: @b: @c`
+]]);
+
+// readFile
+TestRoute.POST.push([["/readFile"], [
+	`A.readFile > xyz: @filePath: text`,
+	`A.printObject`
+	//pipeFile tương tự
+]]);
+
+// readFolder ...
+TestRoute.POST.push([["/readFolder"], [
+	`A.printObject`,
+	`A.readFolder: @filePath`,
+
+]]);
+
+// 	copyFile
+TestRoute.POST.push([["/copyFile"], [
+	`A.copyFile: @filePath: @toPath:: true`,
+
+]]);
+
+
+// 	moveFile
+TestRoute.POST.push([["/moveFile"], [
+	`A.moveFile: @filePath: @toPath`,
+
+]]);
+
+// 	deleteFile
+TestRoute.POST.push([["/deleteFile"], [
+	`A.deleteFile: @fromPath`,
+
+]]);
+
+// fileComponent
+TestRoute.POST.push([["/checkFileExist"], [
+	`A.fileComponent > xyz: @filepath`,
+	`A.printObject`
+]]);
+
+// checkFileExist
+TestRoute.POST.push([["/checkFileExist"], [
+	`A.checkFileExist > xyz: @fromPath: true`,
 	`A.printObject`
 ]]);
 
@@ -37,6 +126,7 @@ TestRoute.POST.push([["/assertObject"], [
 	})`,
 	`A.printObject`
 ]]);
+
 
 // A.checkObject
 TestRoute.POST.push([["/checkObject"], [
@@ -66,6 +156,39 @@ TestRoute.POST.push([["/typeObject"], [
 	`A.typeObject: name: int`,
 
 ]]);
+// setKValue
+TestRoute.POST.push([["/setKValue"], [
+	`A.setKValue: @_id: @data: 5000`
+
+
+]]);
+// getKValue
+TestRoute.POST.push([["/getKValue"], [
+	`A.getKValue > xyz: @_id`,
+	`A.printObject`,
+
+]]);
+
+// setCacheObject
+TestRoute.POST.push([["/setCacheObject"], [
+	`A.printObject`,
+	`A.setCacheObject: test: @_id : @infor: 600`,
+	`A.printObject`
+
+]]);
+// fileInfor
+TestRoute.POST.push([["/fileInfor"], [
+	`A.fileInfor: @fromPath: @toPath`
+
+]]);
+
+
+// getCacheObject
+TestRoute.POST.push([["/getCacheObject"], [
+	`A.getCacheObject: test: @_id`,
+
+]]);
+
 // sortObject
 TestRoute.GET.push([["/sort"], [
 	// Tìm _id ở route để delete

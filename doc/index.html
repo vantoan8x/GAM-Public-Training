@@ -257,18 +257,22 @@ opsops<!DOCTYPE html>
                 <li>
                     <p><strong>A.trimObject: obj: trimEmptyString=true: trimEmptyObject=true</strong> : remove all empty
                         key-path value.</p>
+                     Xóa những key rỗng nếu key cha bọc duy nhất một key rỗng thì sẽ xóa luôn key cha đó   
                 </li>
                 <li>
                     <p><strong>A.flatObject: obj: maxLevel=0</strong> : flat all object and sub object to one level
                         array.</p>
+                        Lấy key và value thành 1 cấp của obj, maxLevel >= 0 là lấy tất cả các cấp, 1 2 3 ,... lấy theo cấp của  maxLevel
                 </li>
                 <li>
                     <p><strong>A.allKeyObject: obj: maxLevel=0</strong> : get all object/subobject (maxLevel &lt;= 0)
                         key into an array.</p>
                 </li>
+                        Lấy key có trong ojb >= 0 là lấy tất cả các key còn lớn hơn phù hơp với cấp độ xét cho maxLevel
                 <li>
                     <p><strong>A.allValueObject: obj: maxLevel=0</strong> : get all object/subobject (maxLevel &lt;= 0)
                         value into an array.</p>
+                        Lấy value có trong ojb >= 0 là lấy tất cả các key còn lớn hơn phù hơp với cấp độ xét cho maxLevel
                 </li>
                 <li>
                     <p><strong>A.selectObject: objs: keyPath: value: matchKeyName='match': restKeyName='rest'</strong> :
@@ -646,12 +650,22 @@ opsops<!DOCTYPE html>
                     from db object.</li>
                 <li>
                     <strong>A.setCacheObject: model: key: obj: expired</strong> :</li>
+                    VD: <br>
+                    `A.setCacheObjec: test: @_id: @infor: 600` // lưu infor vào cache với key là id trong thời gian 600s
                 <li>
                     <strong>A.getCacheObject: model: key</strong> :</li>
+                    VD </br>
+                    `A.getCacheObjec: test: @_id` // get data đã lưu từ key _id có trong cache
+
                 <li>
                     <strong>A.setKValue: key: val: expired</strong> :</li>
+                    expired: thời gian key tồn tại <br>
+                    VD:<br>
+                    `A.setKValue: @_id: @data: 5000` // lưu trữ data vào redis
                 <li>
                     <strong>A.getKValue: key</strong> :</li>
+                    // Lấy data phù hợp với key
+                    `A.getKValue: _id`
             </ul>
             <h4>
                 <a id="user-content-adjust-object-io" class="anchor" href="#adjust-object-io" aria-hidden="true"><svg
@@ -854,6 +868,10 @@ opsops<!DOCTYPE html>
                 <li>
                     <strong>A.deleteById: collectionName: idKey='_id': hardDelete=true</strong> : delete item in
                     database, idKey is key of object '$match' filter.</li>
+                    VD: </br>
+                    `A.deleteById: user` </br>
+                    - idKey sẽ lấy id mặc đinh ở route hoặc body
+                    - hardDelete mặc định true, bật false sẽ ẩn đi không xóa
                 <li>
                     <strong>A.deleteByIdWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: hardDelete=true: filterKey='_id'</strong> :</li>
@@ -870,6 +888,9 @@ opsops<!DOCTYPE html>
                 <li>
                     <strong>A.deleteMany: collectionName: key="_id": hardDelete=true</strong> : delete many items in
                     database, key is key or object of object '$match' filter</li>
+                    Tương tự như deleteById <br/>
+                    VD: <br/>
+                    `A.deleteMany(filter): user` // sẽ xóa những document theo điều kiện của filter
                 <li>
                     <strong>A.deleteManyWIndex: routeSrcField: foreignField: targetCollection: groupField:
                         routeTargetField: hardDelete=true: filterKey='_id'</strong> :</li>
@@ -885,8 +906,10 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.findAll: collectionName</strong> : find all items in database collection;</li>
+                    `A.findAll: user` // Tìm kiếm tất cả các document có trong collection user
                 <li>
                     <strong>A.deleteAll: collectionName</strong> : delete all items in database collection;</li>
+                    `A.deleteAll: user` // Xóa tất cả các document có trong collection user
             </ul>
             <h4>
                 <a id="user-content-mongo-commmon" class="anchor" href="#mongo-commmon" aria-hidden="true"><svg
@@ -904,6 +927,13 @@ opsops<!DOCTYPE html>
                 <li>
                     <strong>A.populate: ... : collectionName: localField: foreignField='_id': '+/-': projectKeys :
                         ...</strong> :</li>
+                        - collectionName: tên collection để populate <br>
+                        - localField: key truyền vào để filter với key trong collection <br>
+                        - foreignField: key ở collection để filter với key ở localField (mặc định là _id) <br>
+                        - +/-': projectKeys : loại bỏ hoặc giữ những key cần thiết <br>
+                        VD: <br>
+                        `A.populate: product, products._id, _id, -, createdAt, modifiedAt`,
+                    
             </ul>
             <h4>
                 <a id="user-content-mongo-commmon-1" class="anchor" href="#mongo-commmon-1" aria-hidden="true"><svg
@@ -938,26 +968,50 @@ opsops<!DOCTYPE html>
                     </svg></a>File Interract</h4>
             <ul>
                 <li>
-                    <strong>A.writeFile: filePath: fileContent: override=true</strong> :</li>
+                    <strong>A.writeFile: filePath: fileContent: mode="override"</strong> :</li>
+                    - filePath: đường dẫn lưu file <br>
+                    - fileContent : nội dung file <br>
+                    - mode: override, append, top/insert (mặc đinh: override)<br>  
+                    VD: <br>
+                    `A.writeFile: @filePath: @fileContent: override`
+
                 <li>
-                    <strong>A.readFile: filePath: mode='stream': defValue</strong> : read file in location.</li>
+                    <strong>A.readFile: filePath: mode='text': defValue</strong> : read file in location.</li>
+                    mode: text hoặc json mặc định là text <br>
+                    VD: <br>
+                    `A.readFile: @filePath: text`
+
                 <li>
                     <strong>A.pipeFile: filePath: defValue</strong> : pipe file from location ($Res/ : for Resource
                     folder in root src).</li>
+                    Tương tự như A.readFile
                 <li>
                     <strong>A.readFolder: filePath: recursive=false</strong> : : or listFolder are same).</li>
-                <li>
+                    <br>recursive: có thể thao tác luôn cả thư mục con <br> <br>
+                <li>  
                     <strong>A.copyFile: fromPath: toPath: recursive=true: removeSource=false</strong> :</li>
+                    removeSource: xóa file ở fromPath
+                    VD: <br> 
+                    `A.copyFile: @fromPath: @toPath:: true` // copy file từ formPath sang toPath và xóa file ở fromPath
                 <li>
                     <strong>A.moveFile: fromPath: toPath: recursive=true</strong> :</li>
+                    VD: <br>
+                    `A.moveFile: @fromPath: @toPath` // move file ở fromPath sang toPath
+
                 <li>
                     <strong>A.deleteFile: fromPath: recursive=true</strong> :</li>
+                    `A.deleteFile: @fromPath` // delete file ở fromPath
+
                 <li>
-                    <strong>A.fileInfor: fromPath: toPath</strong> :</li>
+                    <strong>A.fileInfor: fromPath</strong> :</li>
+                    `A.fileInfor: @fromPath` // xem thông tin của file @fromPath
+
                 <li>
                     <strong>A.checkFileExist: fromPath: isFile</strong> :</li>
+                    `A.checkFileExist: fromPath` // kiểm tra file có tồn tại không
                 <li>
                     <strong>A.fileComponent: filepath</strong> : plit filepath to component (ext, name, base, path).
+                    `A.fileComponent: @filepath` // trả về ext, name, base, path
                 </li>
             </ul>
             <h4>
@@ -971,8 +1025,15 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.zipFile: fromPath: toPath: password=''</strong> :</li>
+                    - fromPath: đường dẫn đến file zip <br>
+                    - toPath: đường dẫn lưu zip <br>
+                    - password: password cho file zip <br>
+                    `A.zipFile: @fromPath: @toPath: @password `
                 <li>
                     <strong>A.unZipFile: fromPath: toPath: password=''</strong> :</li>
+                    - fromPath: đường dẫn đến thư
+                    - toPath: Zip cần giải nến 
+                    - password: password giả nén
             </ul>
             <h4>
                 <a id="user-content-file-system" class="anchor" href="#file-system" aria-hidden="true"><svg
@@ -1068,9 +1129,13 @@ compressed	: compressed
                 <li>
                     <strong>A.createPassword: password</strong> : create encoded password used to save to DB, return
                     encoded string password.</li>
+                    `A.createPassword: password` // create password encodedPassword
                 <li>
                     <strong>A.checkPassword: password: encodedPassword</strong> : check password matched with encoded
                     password.</li>
+                    `A.checkPassword: password: encodedPassword` // kiểm tra password thỏa mãn có thỏa mãn không
+                    
+
             </ul>
             <hr>
             <h3>
