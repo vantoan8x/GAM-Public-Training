@@ -251,8 +251,10 @@ opsops<!DOCTYPE html>
                 <li>
                     <p><strong>A.mergeObject: obj0: ...obj1</strong> : merge one sub-key level all objN into obj0.</p>
                 </li>
+                    `A.mergeObject: Obj0: Obj1: Obj2` // merge các ojb vào obj0 theo lớp đầu tiên
                 <li>
                     <p><strong>A.mergeFreeObject: obj0: ...obj1</strong> : merge all key, subkey in objN into obj0.</p>
+                    `A.mergeFreeObject: Obj0: Obj1: Obj2` // merge các ojb vào obj0 cho tất cả các lớp
                 </li>
                 <li>
                     <p><strong>A.trimObject: obj: trimEmptyString=true: trimEmptyObject=true</strong> : remove all empty
@@ -493,8 +495,6 @@ opsops<!DOCTYPE html>
                     
                     <strong>A.sleep: second</strong> : sleep in seconds.</li> <br>
                     `A.sleep: 10` (mặc định 1 giây) <br><br>
-                <li>
-                    <strong>A.pause:</strong> : pause application and wait for user action.</li>
                 <li>
                     <strong>A.pipeRoute: pipeName</strong> : include another route by pipeName into this pipe line to
                     run.</li>

@@ -17,6 +17,47 @@ const TestRoute = {
 	}
 };
 
+// aggregate
+TestRoute.POST.push([["/aggregate"], [
+	`A.aggregate: test: ({
+		 user: 123456
+	}) `,
+
+]]);
+
+// verifyObject
+TestRoute.POST.push([["/verifyObject"], [
+	`A.verifyObject: test`,
+	`A.printObject`
+
+]]);
+
+// groupObject
+TestRoute.POST.push([["/groupobject"], [
+	`A.groupObject > x: @test: a: 123`,
+	`A.printObject(x)`,
+
+]]);
+
+//selectObject
+TestRoute.POST.push([["/selectobject"], [
+	`A.selectObject > x: @test: a: 123`,
+	`A.printObject(x)`,
+
+]]);
+
+// Insert
+TestRoute.POST.push([["/db"], [
+	// `A.findAll > x: B.user`,
+	// `A.findAll > y: A.test`,
+	// `A.insertOne(key1): A.test`,
+	`A.findAll > infor: B.test`,
+	`A.populate: A.test, infor._id, _id, -, createdAt, modifiedAt`
+
+]]);
+
+
+
 // mergeObject
 TestRoute.POST.push([["/mergeobject"], [
 	`A.mergeObject: @obj1: @obj2: @obj3`,
@@ -63,8 +104,15 @@ TestRoute.POST.push([["/zipFile"], [
 
 // calculate
 TestRoute.POST.push([["/calculate"], [
-	`A.calculates: -: @a: @b: @c`
+	`A.calculate: -: @a: @b: @c`
 ]]);
+
+// calculate
+TestRoute.POST.push([["/calculates"], [
+	`A.calculates > x: +: @a: @b: @c`,
+	`A.printObject(x)`
+]]);
+
 
 // readFile
 TestRoute.POST.push([["/readFile"], [
