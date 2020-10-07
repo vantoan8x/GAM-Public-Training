@@ -277,12 +277,45 @@ opsops<!DOCTYPE html>
                         Lấy value có trong ojb >= 0 là lấy tất cả các key còn lớn hơn phù hơp với cấp độ xét cho maxLevel
                 </li>
                 <li>
-                    <p><strong>A.selectObject: objs: keyPath: value: matchKeyName='match': restKeyName='rest'</strong> :
-                        select objs in array/pipeData by keyPath-value, return object.</p>
+                    <p><strong>A.selectObject: arrs: keyPath: value: matchKeyName='match': restKeyName='rest'</strong> :
+                        select object in array/pipeData arrs by keyPath-value, return object.</p>
+                        - arrs: các obj truyền vào <br>
+                        - keyPath: Key cần select <br>
+                        - value: giá trị của key để select <br>
+                        - matchKeyName: mảng chưa các phần tử phù hợp với select mặc định là match <br>
+                        - restKeyName: mảng chứa các phần tử không phù hợp <br>
+                        VD: <br> 
+                        `A.selectObject: test: a: a` <br>
+                        test = [ { "a": 1, "b": 2   }, <br>
+                        { "a": "a", "b": 2 }, <br>
+                        { "a": "b","c": 3  }, <br>
+                        { "a": "a","x": 10 }] <br>
+                        key: a <br>
+                        value: a <br>
+                        Kết quả  <br>
+                        match: [ { a: 'a', b: 2 }, { a: 'a', x: 10 } ] <br>
+                        rest: [ { a: 1, b: 2 }, { a: 'b', c: 3 } ]
+ 
                 </li>
                 <li>
-                    <p><strong>A.groupObject: objs: keyPath: restKeyName=rest'</strong>: group objs in array/pipeData by
+                    <p><strong>A.groupObject: arrs: keyPath: restKeyName=rest'</strong>: group object in array/pipeData arrs by
                         keyPath-value, return object.</p>
+                        - arrs: các obj truyền vào <br>
+                        - keyPath: Key cần group <br>
+                        - restKeyName: những giá trị không group sẽ lưu vào mảng mặc định là rest <br>
+                        VD: <br>
+                        `A.groupObject:@test: a`
+                        <br>
+                        test = [ { "a": 1, "b": 2   }, <br>
+                        { b": 2 }, <br>
+                        { "a": "b","c": 3  }, <br>
+                        { "a": "a","x": 10 }] <br>
+                        Kết quả trả về: <br>
+                        "rest":[{"b":2}], <br>
+                        "a":[{"a":"a","b":2},{"a":"a","x":10}], <br>
+                        "b":[{"a":"b","c":3}]} <br>
+
+
                 </li>
                 <li>
                     <p><strong>A.verifyObject: model: obj</strong> : verify object structure with defined model
@@ -291,12 +324,17 @@ opsops<!DOCTYPE html>
                 <li>
                     <p><strong>A.unifyObject: obj</strong> : Unified object for remove all duplicated object in array
                         inside input object/pipeData.</p>
+                        `A.unifyObject: abc` // remove những key "" ở trong ojb abc
                 </li>
                 <li>
                     <p><strong>A.uniquizedObject: obj</strong> : Uniquized all ObjectId string to ObjectId.</p>
                 </li>
+                `A.uniquizedObject: _id` // ObjectId string  thành ObjectID
                 <li>
                     <p><strong>A.deUniquizedObject: obj</strong> : Deuniquized all ObjectId to ObjectId string.</p>
+                    Ngược lại uniquizedObject
+                `A.uniquizedObject: _id` // ObjectID thành ObjectID string
+
                 </li>
                 <li>
                     <p><strong>A.transArrayToObject: keyPath: arrs</strong> : transform array to object by keypath.</p>
@@ -447,14 +485,24 @@ opsops<!DOCTYPE html>
                             d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
                         </path>
                     </svg></a>Calculate</h4>
+                    ops : +, -, *, /, %, mod, div, |, ||, abs, max, min, ceil, floor, **, <<, >>, &, |, ^, lg, log, exp, sqrt, rt
             <ul>
                 <li>
                     <strong>A.calculate: ops: ...number</strong> : calculate the list param, ops is the operator param.
                     -&gt; return number.</li>
+                    - ops: toán tử <br>
+                    - number: biến giá trị <br>
+                    `A.calculate: + : @a: @b: @c` <br> 
+                    // a = 1, b = 2, c = 3. Trả về kết quả = 6 <br>  
+
                 <li>
                     <strong>A.calculates: ops: ...numbers</strong> : calculate the list param, ops is the operator
                     param. -&gt; return array.
                     Operator should be, + - * / % ^ &lt;&lt; &gt;&gt; | max min ceil floor log exp sqrt rt.</li>
+                    - Tương tự calculate: <br>
+                    numbers: mảng giá trị  <br> 
+                    `A.calculates: max : @a: @b: @c` <br> 
+                    a = [21,23,1], b = [32,11,0], c = [23,12,43]. Trả về kết quả = [32,23,43] <br>  
             </ul>
             <h4>
                 <a id="user-content-utilites" class="anchor" href="#utilites" aria-hidden="true"><svg
@@ -522,45 +570,18 @@ opsops<!DOCTYPE html>
                     VD: </br>
                     - Chèn chữ 'và' vào giữa vùng hiển thị text của text1 và text2:</br>
                     `A.joinString: và: @text1: @text2` </br></br>
-                    * Xuống dòng: </br>
-                        + "^LF"</br>
-			            + "^CR"</br>
-			            + "\\n"</br></br>
-                    * Tab:</br>
-			            + "^TB"</br>
-			            + "^TAB"</br>
-			            + "\\t"</br></br>
-                    * Khoảng trắng:</br>
-			            + "^SP"</br>
-			            + "\\s"</br>
-			            + "\\ "</br></br>
-                    * Dấu "</br>
-			            + "^DQ"</br>
-			            + "\\\""</br></br>
-                    * Dấu '</br>
-			            + "^SQ"</br>
-			            + "\\\'"</br></br>
-                    * Dấu `</br>
-			            + "^CQ"</br>
-			            + "\\\`"</br></br>
-                    * Dấu .</br>
-			            + "^DOT"</br>
-			            + "\\." </br></br>
-                    * Dấu ,</br>
-			            + "^CM" </br>
-			            + "\\," </br></br>
-                    * Dấu </br>
-			            + "^CO" </br>
-			            + "\\:" </br></br>
-                    * Dấu ;</br>
-			            + "^SC" </br>
-			            + "\\;" </br></br>
-                    * Dấu (</br>
-			            + "^OB" </br>
-			            + "\\(" </br></br>
-                    * Dấu )</br>
-			            + "^CB" </br>
-                        + "\\)"</br></br>
+                    * Xuống dòng: "^LF", "^CR", "\\n"</br>
+                    * Tab: "^TB", "^TAB", "\\t"</br>
+                    * Khoảng trắng: "^SP", "\\s", "\\ "</br>
+                    * Dấu ": "^DQ", "\\\""</br>
+                    * Dấu ': "^SQ", "\\\'"</br>
+                    * Dấu `: "^CQ", "\\\`"</br>
+                    * Dấu .: "^DOT", "\\."</br>
+                    * Dấu ,: "^CM", "\\," </br>
+                    * Dấu :: "^CO", "\\:" </br>
+                    * Dấu ;: "^SC", "\\;" </br>
+                    * Dấu (: "^OB", "\\(" </br>
+                    * Dấu ): "^CB", "\\)" </br>
                     * Có thể chèn theo kí tự hexa</br></br>
                 <li>
                     <strong>A.joinWrapString: joinLetter: BeforeLetter: AfterLetter: ...strings</strong> :</li>
@@ -732,11 +753,21 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.getDBObject: colName: filter</strong> : get database object with filter.</li>
+                    - colName: colletion cần get <br>
+                    - filter: điều kiện để get data <br>
+                    `A.getDBObject: test: _id`
+                    // get data theo _id có trong collection test
                 <li>
                     <strong>A.setDBObject: colName: object</strong> : set new object into database.</li>
+                    `A.setDBObject: test: infor`
+                    // insert ojb infor vào collection test
                 <li>
                     <strong>A.updateDBObject: colName: object: keyName: mustCreate=false</strong> : update (or create
                     new) object into database.</li>
+                    - colName: tên collection cần update
+                    - object: obj update cho collection đó
+                    - keyName: update đúng các gía trị của keyName truyền vào
+                    - mustCreate: mặc định là false nếu true keyName không tồn tại sẽ tạo document mới
             </ul>
             <h4>
                 <a id="user-content-insert-one" class="anchor" href="#insert-one" aria-hidden="true"><svg

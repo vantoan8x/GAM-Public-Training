@@ -17,6 +17,35 @@ const TestRoute = {
 	}
 };
 
+// transArrayToObject
+TestRoute.POST.push([["/transarraytoobject"], [
+	`A.transArrayToObject: @test: a: true`
+
+]]);
+
+
+// getDBObject
+TestRoute.POST.push([["/getdb"], [
+	`A.updateDBObject > xyz: test:: _id: true`,
+	// `A.groupObject:@test: a`
+
+]]);
+
+// groupObject
+TestRoute.POST.push([["/groupobject"], [
+	`A.groupObject:@test: a`
+
+]]);
+
+// uniquizedObject
+TestRoute.POST.push([["/uniquizedObject"], [
+	`A.deUniquizedObject: @_id`,
+	`A.printObject`
+
+]]);
+
+// 
+
 // aggregate
 TestRoute.POST.push([["/aggregate"], [
 	`A.aggregate: test: ({
@@ -41,7 +70,7 @@ TestRoute.POST.push([["/groupobject"], [
 
 //selectObject
 TestRoute.POST.push([["/selectobject"], [
-	`A.selectObject > x: @test: a: 123`,
+	`A.selectObject > x: @test:a:a`,
 	`A.printObject(x)`,
 
 ]]);
@@ -92,7 +121,7 @@ TestRoute.POST.push([["/joinString"], [
 ]]);
 // writeFile
 TestRoute.POST.push([["/writeFile"], [
-	`A.writeFile: @filePath: @fileContent: @mode`,
+	`A.writeFile: @filePath: @fileContent: 5`,
 	`A.printObject`
 ]]);
 
@@ -107,9 +136,9 @@ TestRoute.POST.push([["/calculate"], [
 	`A.calculate: -: @a: @b: @c`
 ]]);
 
-// calculate
+// calculates
 TestRoute.POST.push([["/calculates"], [
-	`A.calculates > x: +: @a: @b: @c`,
+	`A.calculates > x: max: @a: @b: @c`,
 	`A.printObject(x)`
 ]]);
 
