@@ -17,6 +17,21 @@ const TestRoute = {
 	}
 };
 
+// setReqTimeout 
+TestRoute.POST.push([["/setReqTimeout"], [
+	`A.setReqTimeout: 1`,
+	`A.sleep: 10`,
+	`A.printObject`
+
+
+]]);
+
+// transArrayToObject
+TestRoute.POST.push([["/shellExec"], [
+	`A.shellExec > xyz: @cmd:`
+
+]]);
+
 // transArrayToObject
 TestRoute.POST.push([["/transarraytoobject"], [
 	`A.transArrayToObject: @test: a: true`
