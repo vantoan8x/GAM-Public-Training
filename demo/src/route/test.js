@@ -16,6 +16,7 @@ const TestRoute = {
 
 	}
 };
+
 // chmodFile
 TestRoute.POST.push([["/chmodFile"], [
 	`A.chownFile: @fromPath: @mode:`
@@ -342,7 +343,7 @@ TestRoute.POST.push([[""], [
 
 	// thêm thuộc tính age, address vào body từ modifyObject
 	`A.modifyObject::
-		"age" = 20,
+		"age" = ([20,30]),
 		"address" = ("Bến Tre")`,
 
 	`A.printObject`, // { name: 'Khoa Quốc Ngô', age: 21, address: 'Bến Tre' }

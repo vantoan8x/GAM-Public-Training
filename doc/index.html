@@ -191,161 +191,187 @@ opsops<!DOCTYPE html>
                     </svg></a>Adjust Object</h4>
             <ul>
                 <li>
-                    <p><strong>A.mixObject: model : obj</strong> : create new object from obj defination, and verify
-                        with model (if specific).</p>
-                    - model: tên model đã định nghĩa (có thể có hoặc không có) </br>
-                    - obj: tạo ra một obj mới </br></br> 
-                    VD: </br> </br>
-                    `A.mixObject: abc: ({ </br>
-                        "name" : "xyz", </br>
-                        "age"  : 22 </br>
-                    })` </br> </br>
-                    Các key sau khi mixObject sẽ được gán vào body (body.name, body.age). Ta có thể gán vào biến như sau: </br> </br>
-                    `A.mixObject > temp: abc: ({ </br>
-                        "name" : "xyz", </br>
-                        "age"  : 22 </br>
-                    })` </br></br>
-                    Các key sẽ được gán vào biến temp (temp.name, temp.age) </br> </br>
-                    - TH không có model: </br>
-                    `A.mixObject:: ({ </br>
-                        "name" : "gitgam", </br>
-                        "age"  : 22 </br>
-                    })`</br></br>
-                    Kết quả trả về sẽ giống kết quả của obj gán cho từng key </br></br>
-                    - TH có model:   </br>
-                    `A.mixObject: abc : ({ </br>
-                        "name" : "xyz",
-                        "age"  : 22 </br>
-                    })`</br></br>
-                    Phải đúng định dạng của model đã định nghĩa kiểu dữ liệu và key tồn tại. Nếu không tồn tại key trong model sẽ bị triệt tiêu còn key không đúng kiểu dữ liệu sẽ cho kết quả undefined
+                    <p><strong>A.mixObject: model : obj</strong> : create new object from obj defination, and verify with model (if specific).</p>
+                    <p>
+                        - model: tên model đã định nghĩa (có thể có hoặc không có) </br>
+                        - obj: tạo ra một obj mới
+                    </p> 
+                    <p>     
+                        `A.mixObject: abc: ({ "name" : "gitgam", "address"  : "Xa Lo Ha Noi" })`</br>
+                        Các key sau khi mixObject sẽ được gán vào body (body.name, body.address). </br>
+                    </p> 
+                    <p>
+                        Ta có thể gán vào key mới trong body như sau: </br>
+                        `A.mixObject > infor: abc: ({ "name" : "gitgam", "address"  : "Xa Lo Ha Noi" })`</br>
+                        Các key sẽ được gán vào biến body.infor (infor.name, infor.address)
+                    </p>
+                    <strong>- Trường hợp không có model:</strong>
+                    <p>
+                        `A.mixObject:: ({ "name" : "gitgam", "address"  : "Xa Lo Ha Noi" })`</br>
+                        Kết quả trả về sẽ giống kết quả của obj gán cho từng key
+                    </p>
+                    <strong>- Trường hợp có model:</strong>
+                    <p>
+                        `A.mixObject: abc : ({ "name" : "gitgam", "address"  : "Xa Lo Ha Noi" })` </br>
+                        Phải đúng định dạng của model đã định nghĩa kiểu dữ liệu và key tồn tại. Nếu không tồn tại key trong model sẽ bị triệt tiêu còn key không đúng kiểu dữ liệu sẽ cho kết quả undefined
+                    </p>
                 </li>
                 <li>
-                    <p><strong>A.modifyObject: obj: ...keys</strong> : same as verifyInput, but dont use model verify.
+                    <p><strong>A.modifyObject: obj: ...keys</strong> : same as verifyInput, but dont use model verify.</p>
+                    <p>
+                        - obj: tên ojb cần truyền key vào mặc định là body </br>
+                        - ... keys: định nghĩa key và giá trị cho từng key
                     </p>
-                    - obj: tên ojb cần truyền key vào mặc định là body </br>
-                    - ... keys: định nghĩa key và giá trị cho từng key </br> </br>
-                    VD: </br> </br>
-                    `A.modifyObject:: 
-                        "name" = ("gitgam"),
-                        "address" = ("Xa Lo Ha Noi")`
-                    </br> </br>
-                    Các key sẽ được lần lượt gán vào body (body.name, body.address) và có gía trị tương ứng</br>
-                    * Lưu ý: nên để value vào (). </br></br>
-                    Có thể rán gì trị vào cả route, header, ...  </br></br>
-                    VD: </br>
-                    `A.modifyObject(*): P.route: 
-                        "name" = ("gitgam"),
-                        "address" = ("Xa Lo Ha Noi")`
+                    <p>
+                        `A.modifyObject:: "name" = ("gitgam"), "address" = ("Xa Lo Ha Noi")` </br>
+                        Kiểu của value: (""): chuỗi, (number): số , (@): biến, ({}): obj, ([]): arr </br>
+                        Các key sẽ được lần lượt gán vào body (body.name, body.address) và có gía trị tương ứng</br>
+                    </p>
+                    <p>
+                        * Lưu ý: nên để value vào ().
+                    </p>
+                    <strong>Có thể rán gì trị vào cả route, header, body</strong>
+                    <p>`A.modifyObject(*): P.route: "name" = ("gitgam"), "address" = ("Xa Lo Ha Noi")`</p>
+                    
                 </li>
                 <li>
                     <p><strong>A.shadowObject: ...objs</strong> : shadow one sub-key level all objs object.</p>
-                    `A.shadowObject > respData`
-                    </br>
-                    shadow sang obj respData (mặc định là body).
-                    </br></br>
-                    `A.shadowObject(xyz) > respData`
-                    </br>
-                    shadow obj xyz sang respData
-
+                    <p>
+                        objs: các obj truyền vào để shadow
+                    </p>
+                    <p>
+                        `A.shadowObject > respData` </br>
+                        shadow tất cả các obj từ client gửi lên và lưu vào respData (body, route, header)
+                    </p>
+                    <p>
+                        `A.shadowObject > respData: infor1: infor2` </br>
+                        shadow obj infor1, infor2 và lưu vào respData (body, route, header)
+                    </p>
+                    <p>
+                        `A.shadowObject(xyz) > respData` </br>
+                        shadow tất cả các obj trong obj xyz và lưu vào respData
+                    </p>
                 </li>
                 <li>
                     <p><strong>A.mergeObject: obj0: ...obj1</strong> : merge one sub-key level all objN into obj0.</p>
                 </li>
-                    `A.mergeObject: Obj0: Obj1: Obj2` // merge các ojb vào obj0 theo lớp đầu tiên
+                    <p>
+                        `A.mergeObject: Obj0: Obj1: Obj2: Obj3` </br>
+                        merge các ojb vào obj0 theo cấp ojb đầu
+                    </p>
                 <li>
                     <p><strong>A.mergeFreeObject: obj0: ...obj1</strong> : merge all key, subkey in objN into obj0.</p>
-                    `A.mergeFreeObject: Obj0: Obj1: Obj2` // merge các ojb vào obj0 cho tất cả các lớp
+                    <p>
+                        `A.mergeFreeObject: Obj0: Obj1: Obj2: Obj3` </br>
+                        merge các ojb vào obj0 cho tất cả các cấp
+                    </p>
                 </li>
                 <li>
                     <p><strong>A.trimObject: obj: trimEmptyString=true: trimEmptyObject=true</strong> : remove all empty
                         key-path value.</p>
-                     Xóa những key rỗng nếu key cha bọc duy nhất một key rỗng thì sẽ xóa luôn key cha đó   
+                        <p>
+                            - obj: obj cần truyền vào đểm trimObject </br>
+                            - trimEmptyString: xóa các key có value Empty mặc định là true, </br>
+                            - trimEmptyObject: xóa các obj Empty mặc định là true </br>
+                        </p>
+                        <p>
+                            `A.trimObject: obj` </br> 
+                            Xóa những key rỗng nếu key cha bọc duy nhất một key rỗng thì sẽ xóa luôn key cha đó   
+                        </p>
                 </li>
                 <li>
                     <p><strong>A.flatObject: obj: maxLevel=0</strong> : flat all object and sub object to one level
                         array.</p>
-                        Lấy key và value thành 1 cấp của obj, maxLevel >= 0 là lấy tất cả các cấp, 1 2 3 ,... lấy theo cấp của  maxLevel
+                        <p> Lấy key và value của obj. Nếu maxLevel nhỏ hơn bằng 0 sẽ lấy tất cả các cấp. Còn lớn hơn 0 thì sẽ lấy theo cấp mà maxLevel truyền vào</p>
                 </li>
                 <li>
                     <p><strong>A.allKeyObject: obj: maxLevel=0</strong> : get all object/subobject (maxLevel &lt;= 0)
                         key into an array.</p>
                 </li>
-                        Lấy key có trong ojb >= 0 là lấy tất cả các key còn lớn hơn phù hơp với cấp độ xét cho maxLevel
+                <p> Lấy <strong>key</strong> của obj. Nếu maxLevel nhỏ hơn bằng 0 sẽ lấy tất cả các cấp. Còn lớn hơn 0 thì sẽ lấy theo cấp mà maxLevel truyền vào</p>
                 <li>
                     <p><strong>A.allValueObject: obj: maxLevel=0</strong> : get all object/subobject (maxLevel &lt;= 0)
                         value into an array.</p>
-                        Lấy value có trong ojb >= 0 là lấy tất cả các key còn lớn hơn phù hơp với cấp độ xét cho maxLevel
+                <p> Lấy <strong>value</strong> của obj. Nếu maxLevel nhỏ hơn bằng 0 sẽ lấy tất cả các cấp. Còn lớn hơn 0 thì sẽ lấy theo cấp mà maxLevel truyền vào</p>
                 </li>
                 <li>
                     <p><strong>A.selectObject: arrs: keyPath: value: matchKeyName='match': restKeyName='rest'</strong> :
                         select object in array/pipeData arrs by keyPath-value, return object.</p>
-                        - arrs: các obj truyền vào <br>
-                        - keyPath: Key cần select <br>
-                        - value: giá trị của key để select <br>
-                        - matchKeyName: mảng chưa các phần tử phù hợp với select mặc định là match <br>
-                        - restKeyName: mảng chứa các phần tử không phù hợp <br>
-                        VD: <br> 
-                        `A.selectObject: test: a: a` <br>
-                        test = [ { "a": 1, "b": 2   }, <br>
-                        { "a": "a", "b": 2 }, <br>
-                        { "a": "b","c": 3  }, <br>
-                        { "a": "a","x": 10 }] <br>
-                        key: a <br>
-                        value: a <br>
-                        Kết quả  <br>
-                        match: [ { a: 'a', b: 2 }, { a: 'a', x: 10 } ] <br>
-                        rest: [ { a: 1, b: 2 }, { a: 'b', c: 3 } ]
- 
+                        <p>
+                            - arrs: các obj truyền vào <br>
+                            - keyPath: key cần select <br>
+                            - value: giá trị của key để select <br>
+                            - matchKeyName: chứa các phần tử phù hợp với select mặc định sẽ chứa vào mảng match <br>
+                            - restKeyName: chứa các phần tử không phù hợp mặc định sẽ chứa vào mảng rest <br>
+                        </p>   
+                        <p>
+                            `A.selectObject: test: a: a` <br>
+                            test = [ { "a": 1, "b": 2   },{ "a": "a", "b": 2 },{ "a": "b","c": 3  }, { "a": "a","x": 10 } ] <br>
+                            key: a, value: a <br>
+                            Kết quả: match: [ { a: 'a', b: 2 }, { a: 'a', x: 10 } ], rest: [ { a: 1, b: 2 }, { a: 'b', c: 3 } ]
+                        </p>               
                 </li>
                 <li>
                     <p><strong>A.groupObject: arrs: keyPath: restKeyName=rest'</strong>: group object in array/pipeData arrs by
                         keyPath-value, return object.</p>
-                        - arrs: các obj truyền vào <br>
-                        - keyPath: Key cần group <br>
-                        - restKeyName: những giá trị không group sẽ lưu vào mảng mặc định là rest <br>
-                        VD: <br>
-                        `A.groupObject:@test: a`
-                        <br>
-                        test = [ { "a": 1, "b": 2   }, <br>
-                        { b": 2 }, <br>
-                        { "a": "b","c": 3  }, <br>
-                        { "a": "a","x": 10 }] <br>
-                        Kết quả trả về: <br>
-                        "rest":[{"b":2}], <br>
-                        "a":[{"a":"a","b":2},{"a":"a","x":10}], <br>
-                        "b":[{"a":"b","c":3}]} <br>
-
-
+                        <p>
+                            - arrs: các obj truyền vào </br>
+                            - keyPath: key cần group </br>
+                            - restKeyName: những giá trị không group sẽ lưu vào mảng mặc định là rest </br>
+                        </p>
+                        <p>
+                            `A.groupObject:@test: a` </br>
+                            test = [ { "a": 1, "b": 2   }, { b": 2 }, { "a": "b","c": 3  }, { "a": "a","x": 10 }] </br>
+                            Kết quả trả về: </br>
+                            "rest":[{"b":2}] </br>
+                            "a":[{"a":"a","b":2},{"a":"a","x":10}], "b":[{"a":"b","c":3}]} </br>
+                        </p>
                 </li>
                 <li>
                     <p><strong>A.verifyObject: model: obj</strong> : verify object structure with defined model
                         structure.</p>
-                    - model: tên model <br>
-                    - obj: obj cần verify <br>
-                    `A.verifyObject: test: infor` 
-                    Nếu obj truyền vào các value không đúng định dạng của model sẽ trả về undefined và các key không tồn tại trong model thì các key đó ở obj bị triệt tiêu
+                    <p>
+                        - model: tên model </br>
+                        - obj: obj cần verify </br>
+                    </p>
+                    <p>
+                        `A.verifyObject: test: infor` </br>
+                        Nếu obj truyền vào các value không đúng định dạng của model sẽ trả về undefined và các key không tồn tại trong model sẽ bị triệt tiêu
+                    </p>
+                    
                 </li>
                 <li>
                     <p><strong>A.unifyObject: obj</strong> : Unified object for remove all duplicated object in array
                         inside input object/pipeData.</p>
-                        `A.unifyObject: abc` // remove những key "" ở trong ojb abc
+                        <p>
+                        `A.unifyObject: abc` </br> 
+                        remove những key "" ở trong ojb abc
+                        </p>
                 </li>
                 <li>
                     <p><strong>A.uniquizedObject: obj</strong> : Uniquized all ObjectId string to ObjectId.</p>
                 </li>
-                `A.uniquizedObject: _id` // ObjectId string  thành ObjectID
+                    <p>
+                        `A.uniquizedObject: _id` </br>
+                        ObjectId string  thành ObjectID
+                    </p>
                 <li>
                     <p><strong>A.deUniquizedObject: obj</strong> : Deuniquized all ObjectId to ObjectId string.</p>
-                    Ngược lại uniquizedObject
-                `A.uniquizedObject: _id` // ObjectID thành ObjectID string
+                    <p>
+                        Ngược lại uniquizedObject </br>
+                        `A.uniquizedObject: _id` </br>
+                        ObjectID thành ObjectID string  
+                    </p>
 
                 </li>  
                 <li>
                     <p><strong>A.transArrayToObject: keyPath: hasOverride = false :restKey arrs</strong> : transform array to object by keypath.</p>
-                    - keyPath: truyền key cần trans vào <br/>
-                    - arrs: mảng chứa các ojb <br/>
-                    - hasOverride: mặc định là false sẽ đưa các keypath trùng nhau vào một mảng, true sẽ đè chồng các Keypath giống nhau các key khác sẽ ưu tiền ojb cuối
-                    - restKey: những key không phù hợp sẽ lưu vào restKey mặc định là rest
+                    <p>
+                        - keyPath: truyền key cần trans vào <br/>
+                        - arrs: mảng chứa các ojb <br/>
+                        - hasOverride: mặc định là false sẽ đưa các keypath trùng nhau vào một mảng, true sẽ đè chồng các Keypath giống nhau các key khác sẽ ưu tiền ojb cuối </br>
+                        - restKey: những key không phù hợp sẽ lưu vào restKey mặc định là rest
+                    </p>
 
                 </li>
             </ul>
@@ -360,33 +386,41 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.getKObject: keyPath</strong> : get/gather object by keypath.</li>
-                    - Tìm kiếm một đối tượng nào đó trong mảng.</br>
-                    VD:</br>
-                    `A.getKObject: name` // trả về giá trị của key name.</br></br>
+                    <p>
+                    <strong>Tìm kiếm một đối tượng nào đó trong mảng:</strong> </br>
+                        `A.getKObject: name` </br>
+                        Trả về giá trị của key name
+                    </p>
                 <li>
                     <strong>A.copyKObject: ... : fromkey, toKey : ...</strong> : copy key in object, unreturned result.
-                    - Sao chép giá trị đối tượng này gán vào cho đối tượng khác.</br>
-                    VD: </br>
-                    `A.copyKObject: nameA, nameB` // cả hai key nameA và nameB đều có giá trị giống nhau.</br></br>
+                    <p>
+                        <strong>Sao chép giá trị đối tượng này gán vào cho đối tượng khác.</strong></br>
+                        `A.copyKObject: nameA, nameB` </br>
+                        copy value của key nameA sang key nameB
+                    </p>
                 </li>
                 <li>
                     <strong>A.moveKObject: ... : fromkey, toKey : ...</strong> : move key in object, unreturned result.
-                    - Di chuyển giá trị của key này sang key khác, key được di chuyển không còn giá trị nữa.</br>
-                    VD:</br>
-                    `A.moveKObject: nameA, nameB` // nameB có giá trị của nameA, nhưng name A không tồn tại giá trị nào nữa.</br></br>
+                    <p>
+                        <strong>Di chuyển giá trị của key này sang key khác, key được di chuyển không còn giá trị nữa.</strong>
+                        `A.moveKObject: nameA, nameB` </br> 
+                        move value key nameB sang key nameA
+                    </p>
                 </li>
                 <li>
                     <strong>A.deleteKObject: ...keyPaths</strong> : delete key in object, no result.</li>
-                    - Xóa một key trong đối tượng nào đó.</br>
-                    VD: </br>
-                    `A.deleteKObject: name` // xóa key name.</br></br>
+                    <p>
+                        Xóa key trong obj, keyPaths truyền những key cần xóa
+                        `A.deleteKObject: name` </br>
+                        xóa key name
+                    </p>
                 <li>
                     <strong>A.removeKObject: arrs: keySearch: matchedValue</strong> : delete object in arrs when
                     keySearch matched with matchedValue, unreturned result.</li>
-                    - Tương tự như deleteKObject nhưng phải kèm theo value để xác định chính xác đối tượng cần xóa.</br></br>
+                    <strong>Tương tự như deleteKObject nhưng phải kèm theo value để xác định chính xác đối tượng cần xóa.</br></br></strong> 
                 <li>
                     <strong>A.cloneObject: fromKey: toKey</strong> : clone to new object.</li>
-                    - Tương tự như A.copyKObject</br></br>
+                    <strong>Tương tự như A.copyKObject</strong>
             </ul>
             <h4>
                 <a id="user-content-object-sort" class="anchor" href="#object-sort" aria-hidden="true"><svg
@@ -399,30 +433,34 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.sortObject: obj: keyPath: ascending=true</strong> : Sort list array/object key obj as
-                    stringed-type item.</li></br>
-                    
-                    * Lưu ý: Chỉ sắp xếp mảng hoặc object có kiểu string</br>
-                    VD: </br>
-                    - Sắp xếp tên theo thứ tự a-z</br>
-                    `A.sortObject:: name: true` (mặc định là true nên có thể truyền hoặc không truyền đều được)</br>
-                    - Sắp xếp tên theo thứ tự z-a</br>
-                    `A.sortObject:: name: false`</br></br>
-                    
+                    stringed-type item.</li>
+                    <p>
+                        <strong>Sắp xếp tên theo thứ tự a-z</strong> </br>
+                        `A.sortObject:: name: true`
+                    </p>
+                    <p>
+                        <strong>Sắp xếp tên theo thứ tự z-a</strong></br>
+                        `A.sortObject:: name: false`</br></br>
+                    </p>
                 <li>
                     <strong>A.sortNumberObject: arrs: keyPath: ascending=true</strong> : Sort list array arrs as
                     numbered-type item.</li></br>
 
-                    * Lưu ý: Cách làm tương tự như a.sortObject nhưng chỉ sắp xếp mảng hoặc object có kiểu number</br>
-                    VD: </br>
-                    - Sắp xếp tuổi theo thứ tự tăng dần</br>
-                    `A.sortNumberObject:: age: true` (mặc định là true nên có thể truyền hoặc không truyền đều được)</br>
-                    - Sắp xếp tuổi theo thứ tự giảm dần</br>
-                    `A.sortNumberObject:: age: false`</br></br>
-
-                    * Đối với trường hợp nếu muốn sắp xếp 1 mảng con (arrayA) nằm trong mảng lớn (arrayB):</br>
-                    - Ví dụ sắp xếp tên trong mảng con (arrayA) nằm trong mảng cha (arrayB) theo thứ tự a-z</br>
-                    `A.sortObject(arrayB):: name: true`</br>
-                    - A.sortNumberObject cũng làm tương tự.</br>
+                    <strong>Cách làm tương tự như a.sortObject nhưng chỉ sắp xếp mảng hoặc object có kiểu number</strong></br>
+                    <p>
+                        Sắp xếp tuổi theo thứ tự tăng dần</br>
+                        `A.sortNumberObject:: age: true`
+                    </p>
+                    <p>
+                        Sắp xếp tuổi theo thứ tự giảm dần</br>
+                        `A.sortNumberObject:: age: false`</br></br>
+                    </p>                    
+                    <strong>Đối với trường hợp nếu muốn sắp xếp 1 mảng con (arrayA) nằm trong mảng lớn (arrayB):</strong>
+                    <p>
+                        Ví dụ sắp xếp tên trong mảng con (arrayA) nằm trong mảng cha (arrayB) theo thứ tự a-z</br>
+                        `A.sortObject(arrayB):: name: true`</br>
+                        A.sortNumberObject cũng làm tương tự.</br>
+                    </p>
             </ul>
             <h4>
                 <a id="user-content-object-condition" class="anchor" href="#object-condition" aria-hidden="true"><svg
@@ -437,54 +475,51 @@ opsops<!DOCTYPE html>
                     <strong>A.assertObject: obj: typeAndOr: condictions: failedObject</strong> : assert value by
                     condiction, type is only or/and operand, if the result is failed, flow will be stoped and return
                     failedObject.</li>
-                    - typeAndOr: sử dụng and hoặc or cho các điều </br>
-                    - condictions: điều kiện để tiếp tục thực thi </br>
-                    - failedObject: kết quả faile trả về cho client </br>
-                    VD:
-                        `A.assertObject:::( </br>
-                            num == 1, </br>
-                        ) </br>
-                        :({ </br>
-                            "Value" : "Không phù hợp với điều kiện" </br>
-                        })`, </br>
+                    <p>
+                        - typeAndOr: sử dụng and hoặc or cho các điều </br>
+                        - condictions: điều kiện để tiếp tục thực thi </br>
+                        - failedObject: kết quả faile trả về cho client </br>
+                    </p>
+                    <p>
+                        `A.assertObject:::( num == 1) </br>
+                        :({ "Value" : "Không phù hợp với điều kiện" })`, </br>
                         `A.printObject` </br>
-                    Kiểm tra num có bằng 1 không nếu bằng 1 thì thực thi printObject nếu không bằng thì trả client code : 500, value "Không phù hợp với điều kiện" </br>
-                    Toán tử: <>, !=, < , > , <=, >=, ==, ===, !==, not-regex, regex, not-as, as, not-in, in </br> 
+                        Kiểm tra num có bằng 1 không nếu bằng 1 thì thực thi printObject nếu không bằng thì trả client code : 500, value "Không phù hợp với điều kiện" </br>
+                        Toán tử: <>, !=, < , > , <=, >=, ==, ===, !==, not-regex, regex, not-as, as, not-in, in </br> 
+                    </p>
+                    
                 <li>
                     <strong>A.checkObject: obj: typeAndOr: condictions: successObject: failedObject</strong> : check the
                     condictions with typeAndOr, then return successObject or failedObject matching with the result of
                     checking.</li>
-                    - typeAndOr: sử dụng and hoặc or cho các điều </br>
-                    - condictions: điều kiện để tiếp tục thực thi </br>
-                    - successObject: xử lý khi điều kiện đúng </br>
-                    - failedObject: xủ lý khi điều kiện sai </br>
-                    VD:
-                    `A.checkObject:::( </br>
-                        num > 10,</br>
-                    ) </br>
-                    :({ </br>
-                        "Result" : "Lớn hơn 10" </br>
-                    }) </br>
-                    :({ </br>
-                        "Result" : "Nhỏ hơn 10" </br>
-                    })`, </br>
-                    Sử dụng giống câu lệnh if else </br>
+                    <p>
+                        - typeAndOr: sử dụng and hoặc or cho các điều </br>
+                        - condictions: điều kiện để tiếp tục thực thi </br>
+                        - successObject: xử lý khi điều kiện đúng </br>
+                        - failedObject: xủ lý khi điều kiện sai </br>
+                    </p>
+                    <p>
+                        `A.checkObject:::( num > 10) </br>
+                        :({ "Result" : "Lớn hơn 10" }) </br>
+                        :({ "Result" : "Nhỏ hơn 10" })`, </br>
+                    </p>
+                    *Sử dụng giống câu lệnh if else </br>
                 <li>
                     <strong>A.caseObject: obj: ...optObjs</strong> : check the condiction matching with optObjs, optObj
                     defined as pair of (value: object).</li>
-                    VD: </br>
-                    `A.caseObject: @num: </br>
-                    1: ({"value" : "abc"}): </br>
-                    2: ({"value" : "def"}): </br>
-                    3: ({"value" : "asd"}):` </br>
-                    Sử dụng tương tự như switch case </br>
+                    <p>
+                        `A.caseObject: @num</br>
+                        :1: ({"value" : "abc"}) </br>
+                        :2: ({"value" : "def"}) </br>
+                        :3: ({"value" : "asd"})` </br>
+                    </p>
+                    **Sử dụng tương tự như switch case </br>
                 <li>
                     <strong>A.typeObject: obj: mustBeType</strong> : check object must be type such as: string, array,
                     object, empty, emptyString, emptyArray, emptyObject, null, undefined, boolean, number, int/integer,
                     float/double, date, exist.</li>
-                    mustBeType: kiểu dưng liệu cần kiểm tra (string, array, object, empty, emptyString, emptyArray, emptyObject, null, undefined, boolean, number, int/integer, float/double, date, exist) </br>
-                    VD: </br>
-                    `A.typeObject: @name: int`, </br>
+                    <strong>mustBeType: kiểu dưng liệu cần kiểm tra (string, array, object, empty, emptyString, emptyArray, emptyObject, null, undefined, boolean, number, int/integer, float/double, date, exist) </br></strong>
+                    `A.typeObject: @name: int`
             </ul>
             <h4>
                 <a id="user-content-calculate" class="anchor" href="#calculate" aria-hidden="true"><svg
@@ -494,24 +529,27 @@ opsops<!DOCTYPE html>
                             d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
                         </path>
                     </svg></a>Calculate</h4>
-                    ops : +, -, *, /, %, mod, div, |, ||, abs, max, min, ceil, floor, **, <<, >>, &, |, ^, lg, log, exp, sqrt, rt
             <ul>
                 <li>
                     <strong>A.calculate: ops: ...number</strong> : calculate the list param, ops is the operator param.
                     -&gt; return number.</li>
-                    - ops: toán tử <br>
-                    - number: biến giá trị <br>
-                    `A.calculate: + : @a: @b: @c` <br> 
-                    // a = 1, b = 2, c = 3. Trả về kết quả = 6 <br>  
-
+                    <p>
+                        - ops: +, -, *, /, %, mod, div, |, ||, abs, max, min, ceil, floor, **, <<, >>, &, |, ^, lg, log, exp, sqrt, rt <br>
+                        - number: biến giá trị <br>
+                    </p>
+                    <p>
+                        `A.calculate: + : @a: @b: @c` <br> 
+                        a = 1, b = 2, c = 3. Trả về kết quả = 6 <br>  
+                    </p>                
                 <li>
                     <strong>A.calculates: ops: ...numbers</strong> : calculate the list param, ops is the operator
                     param. -&gt; return array.
                     Operator should be, + - * / % ^ &lt;&lt; &gt;&gt; | max min ceil floor log exp sqrt rt.</li>
-                    - Tương tự calculate: <br>
-                    numbers: mảng giá trị  <br> 
-                    `A.calculates: max : @a: @b: @c` <br> 
-                    a = [21,23,1], b = [32,11,0], c = [23,12,43]. Trả về kết quả = [32,23,43] <br>  
+                    <p>
+                        Tương tự calculate: </br></br>
+                        `A.calculates: max : @a: @b: @c` </br> 
+                        a = [21,23,1], b = [32,11,0], c = [23,12,43]. Trả về kết quả = [32,23,43] <br>  
+                    </p>
             </ul>
             <h4>
                 <a id="user-content-utilites" class="anchor" href="#utilites" aria-hidden="true"><svg
@@ -524,47 +562,59 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.generateUniqueID: randLength=48: embededString</strong> :</li>
-                    `A.generateUniqueID` <br/>
-                    
-                    result: base35302bf59359c211aaf180b051a25776d334c1b02641c39bfyboz12d0cd3n50576ea018
+                    <p>
+                        `A.generateUniqueID` <br/>
+                        result: base35302bf59359c211aaf180b051a25776d334c1b02641c39bfyboz12d0cd3n50576ea018
+                    </p>
                 <li>
                     <strong>A.profilingStamp: name: timeIn</strong> : Calculate profiling time of a name.</li>
                 <li>
                     <strong>A.printObject: fromKey: toKey</strong> : print object content to console, no result</li>
                     in obj ra màn hình <br>
-                    `A.printObject` // in body <br>
-                    `A.printObject(*)` // in tất cả dữ liệu từ client gửi lên <br>
-                    `A.printObject(*): P.route` // in route <br>
-                    `A.printObject(*): P.header` // in header <br>
-                    ...
+                    <p>
+                        `A.printObject` // in body <br>
+                        `A.printObject(*)` // in tất cả dữ liệu từ client gửi lên <br>
+                        `A.printObject(*): P.route` // in route <br>
+                        `A.printObject(*): P.header` // in header <br>
+                        ...
+                    </p>
                 <li>
                     <strong>A.jsScript: objContext: jsScript</strong> : Run script in context objContext global.</li>
-                    Viết câu lệnh thực thi jsScript <br>
-                    `A.jsScript::( <br>
-                        if(!pipeData) { <br>
-                             return {"respData": "pipeData does not exist", "respReturn": true, "respCode": 404}; <br>
-                        } <br>
-                         return pipeData; <br>
-                    )`, <br>
-                    - respData: trả data về client <br>
-                    - respReturn: dừng tại đây <br>
-                    - respCode: trả code về client <br><br>
+                    <p>
+                        Viết câu lệnh thực thi jsScript <br>
+                        `A.jsScript::( </br>
+                            if(!pipeData) { </br>
+                                return {"respData": "pipeData does not exist", "respReturn": true, "respCode": 404}; <br>
+                            } </br>
+                            return pipeData; </br>
+                    )`, </br>
+                    - respData: trả data về client </br>
+                    - respReturn: dừng tại đây </br>
+                    - respCode: trả code về client
+                    </p>
                     
-                    <strong>A.sleep: second</strong> : sleep in seconds.</li> <br>
-                    `A.sleep: 10` (mặc định 1 giây) <br><br>
+                    <strong>A.sleep: second</strong> : sleep in seconds.</li> 
+                    <p>
+                        Sau khoảng thời gian sleep mới tiếp tực thực thi các hàm bên dưới </br>
+                        `A.sleep: 10` (mặc định 1 giây)
+                    </p>
                 <li>
                     <strong>A.pipeRoute: pipeName</strong> : include another route by pipeName into this pipe line to
                     run.</li>
-                    - pipeName : tên của route cần chạy<br>
-                    `A.pipeRoute: user` <br>
-
-                <li>
-                    <strong>A.decodeControlLetter: pipeLineName</strong> : call another pipe function.</li>
+                    <p>
+                        pipeName : tên của route cần chạy<br><br>
+                        `A.pipeRoute: user` <br>
+                        gọi vào api có đặt name = user để thực thi
+                    </p>
                 <li>
                     <strong>A.responseObject: code=200: obj={}: returnRaw=false: forceStop=false</strong> : Return
                     object to client.</li>
-                    - code: status muốn trả về  <br>    
-                    - obj : obj muốn trả về
+                    <p>
+                        - code: status muốn trả về  <br>    
+                        - obj : obj muốn trả về <br> <br>
+                        `A.responseObject: 200: user` <br>
+                        Trả về client với mã code 200 và obj user
+                    </p>
 
             </ul>
             <h4>
@@ -578,52 +628,55 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.joinString: joinLetter: ...strings</strong> :</li>
-
-                    VD: </br>
-                    - Chèn chữ 'và' vào giữa vùng hiển thị text của text1 và text2:</br>
-                    `A.joinString: và: @text1: @text2` </br></br>
-                    * Xuống dòng: "^LF", "^CR", "\\n"</br>
-                    * Tab: "^TB", "^TAB", "\\t"</br>
-                    * Khoảng trắng: "^SP", "\\s", "\\ "</br>
-                    * Dấu ": "^DQ", "\\\""</br>
-                    * Dấu ': "^SQ", "\\\'"</br>
-                    * Dấu `: "^CQ", "\\\`"</br>
-                    * Dấu .: "^DOT", "\\."</br>
-                    * Dấu ,: "^CM", "\\," </br>
-                    * Dấu :: "^CO", "\\:" </br>
-                    * Dấu ;: "^SC", "\\;" </br>
-                    * Dấu (: "^OB", "\\(" </br>
-                    * Dấu ): "^CB", "\\)" </br>
-                    * Có thể chèn theo kí tự hexa</br></br>
+                    <p>
+                    Chèn chữ 'và' vào giữa vùng hiển thị text của text1 và text2:</br>
+                    `A.joinString: và: @text1: @text2`
+                    </p>
+                    <p>
+                        - Xuống dòng: "^LF", "^CR", "\\n"</br>
+                        - Tab: "^TB", "^TAB", "\\t"</br>
+                        - Khoảng trắng: "^SP", "\\s", "\\ "</br>
+                        - Dấu ": "^DQ", "\\\""</br>
+                        - Dấu ': "^SQ", "\\\'"</br>
+                        - Dấu `: "^CQ", "\\\`"</br>
+                        - Dấu .: "^DOT", "\\."</br>
+                        - Dấu ,: "^CM", "\\," </br>
+                        - Dấu :: "^CO", "\\:" </br>
+                        - Dấu ;: "^SC", "\\;" </br>
+                        - Dấu (: "^OB", "\\(" </br>
+                        - Dấu ): "^CB", "\\)" </br>
+                        - Có thể chèn theo kí tự hexa</br></br>
+                    </p>
+        
                 <li>
                     <strong>A.joinWrapString: joinLetter: BeforeLetter: AfterLetter: ...strings</strong> :</li>
 
-                    VD: </br>
-                    -Chèn chữ 'đầu' và phía trước và chữ 'cuối' vào phía sau kí tự của biến text.</br>
-                    `A.joinWrapString::đầu :cuối: @text`</br></br>
-
+                    <p>
+                        Chèn chữ 'đầu' và phía trước và chữ 'cuối' vào phía sau kí tự của biến text.</br>
+                        `A.joinWrapString::đầu :cuối: @text`
+                    </p>
                 <li>
                     <strong>A.splitString: splitLetter: ...strings</strong> :</li>
-
-                    VD: </br>
-                    - Cắt bỏ chữ 'mấy' trong biến text = 'hello mấy bạn'</br>
-                    `A.splitString: mấy : @text`,</br>
-                    + Kết quả trả về ['hello', 'bạn']</br></br>
+                    <p>
+                        Cắt bỏ chữ 'mấy' trong biến text = 'hello mấy bạn'</br>
+                        `A.splitString: mấy : @text`,</br>
+                        Kết quả trả về ['hello', 'bạn']
+                    </p>
 
                 <li>
                     <strong>A.replaceString: stringParam: searchString: replaceString</strong> :</li>
-
-                    VD: </br>
-                    - Thay thế từ 'g' thành từ 'gitgam' trong biến text = 'hello g'</br>
-                    `A.replaceString: @text: g: gitgam`,</br>
-                    + Kết quả trả về 'hello gitgam'</br></br>
+                    <p>
+                        Thay thế từ 'g' thành từ 'gitgam' trong biến text = 'hello g'</br>
+                        `A.replaceString: @text: g: gitgam`,</br>
+                        Kết quả trả về 'hello gitgam'</br></br>
+                    </p>
                 <li>
                     <strong>A.formatString: formatString: ...params</strong> : return format/replace string
                     '{{index|name}}', return new string.</li>
-
-                    VD:</br>
-                    `A.formatString: abc^TB{{text1}}number^TB{{text2}}`,</br>
-                    + Kết quả trả về  abc hello number mấy bạn</br></br>
+                    <p>
+                        `A.formatString: abc^TB{{text1}}number^TB{{text2}}`,</br>
+                        Kết quả trả về  abc hello number mấy bạn</br></br>
+                    </p>
             </ul>
             <h4>
                 <a id="user-content-role-feature-checking" class="anchor" href="#role-feature-checking"
@@ -636,23 +689,31 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.grantToken: token: permission: expired</strong> : Grant token access for a permission string key, in expired.</li>
-                    - token: token truyền lên từ client <br>
-                    - permission: key string <br>
-                    - expired: thời gian tồn tại tính bằng giây <br>
-                    VD: `A.grantToken: token: key: 60` <br>
-                    token tồn tại 60 giây <br>
+                    <p>
+                        - token: token truyền lên từ client <br>
+                        - permission: key string <br>
+                        - expired: thời gian tồn tại tính bằng giây <br>
+                    </p>
+                    <p>
+                        `A.grantToken: token: key: 60` <br>
+                        token tồn tại 60 giây <br>
+                    </p>
                     <strong>A.checkGrantToken: token: permission</strong> : Check Grant token access for a permission.</li>  <br>
-                    `A.checkGrantToken: token: key`<br>
-                    Check token có thời hạn không nếu còn thì tiếp tực xử lý các hàm bên dưới nếu hết thời hạn sẽ trả về client code : 503
-
+                    <p>
+                        `A.checkGrantToken: token: key`<br>
+                        Check token có thời hạn không nếu còn thì tiếp tực xử lý các hàm bên dưới nếu hết thời hạn sẽ trả về client code : 503
+                    </p>
                 <li>
                     <strong>A.checkPermission: model='role': idKeyName='roleId': ...permissionKeys</strong> : Check user
                     role in Param.user[idKeyName] with list of permissionKeys.</li>
-                    - model: tên của model mặc định là role <br>
-                    - idKeyName: id của role cần check <br>
-                    - ...permissionKeys: view, edit, delete, create, ... <br>
-                    VD: <br>
-                    `A.checkPermission(*): role: P.role._id: user.view: user.edit` <br>
+                    <p>
+                        - model: tên của model mặc định là role <br>
+                        - idKeyName: id của role cần check <br>
+                        - ...permissionKeys: view, edit, delete, create, ... <br>
+                    </p>
+                    <p>
+                        `A.checkPermission(*): role: P.role._id: user.view: user.edit` <br>
+                    </p>
                 <li>
                     <strong>A.checkRole: model: modelIdName: roleModel: ...keys</strong> : Check user access resource by
                     role base.</li>
@@ -663,22 +724,6 @@ opsops<!DOCTYPE html>
                     <strong>A.checkCompanyFeature: ...keys</strong> : check company feature enable or not.</li>
                 <li>
                     <strong>A.getView: viewName: extras</strong> : get html view of a defination view.</li>
-            </ul>
-            <h4>
-                <a id="user-content-tree-cache" class="anchor" href="#tree-cache" aria-hidden="true"><svg
-                        class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                        aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z">
-                        </path>
-                    </svg></a>Tree Cache</h4>
-            <ul>
-                <li>
-                    <strong>A.setTreeCacheValue: group: keyPath: value: expired</strong> : set cached object in tree
-                    save-model.</li>
-                <li>
-                    <strong>A.getTreeCacheValue: group: keyPath: cached=true</strong> : get cached object in tree
-                    save-model.</li>
             </ul>
             <h4>
                 <a id="user-content-cache-object" class="anchor" href="#cache-object" aria-hidden="true"><svg
@@ -694,22 +739,30 @@ opsops<!DOCTYPE html>
                     from db object.</li>
                 <li>
                     <strong>A.setCacheObject: model: key: obj: expired</strong> :</li>
-                    VD: <br>
-                    `A.setCacheObjec: test: @_id: @infor: 600` // lưu infor vào cache với key là id trong thời gian 600s
+                    <p>
+                        `A.setCacheObjec: test: @_id: @infor: 600` <br> 
+                        lưu infor vào cache với key là id trong thời gian 600s
+                    </p>
                 <li>
                     <strong>A.getCacheObject: model: key</strong> :</li>
-                    VD </br>
-                    `A.getCacheObjec: test: @_id` // get data đã lưu từ key _id có trong cache
-
+                    <p>
+                        `A.getCacheObjec: test: @_id` </br>  
+                        get data đã lưu từ key _id có trong cache
+                    </p>
                 <li>
                     <strong>A.setKValue: key: val: expired</strong> :</li>
-                    expired: thời gian key tồn tại <br>
-                    VD:<br>
-                    `A.setKValue: @_id: @data: 5000` // lưu trữ data vào redis
+                    <p>
+                    expired: thời gian key tồn tại <br><br>
+                    `A.setKValue: @_id: @data: 5000`<br>
+                    lưu trữ data vào redis
+                    </p>
+                   
                 <li>
                     <strong>A.getKValue: key</strong> :</li>
-                    // Lấy data phù hợp với key
-                    `A.getKValue: _id`
+                    <p>
+                        Lấy data phù hợp với key <br>
+                        `A.getKValue: _id`
+                    </p>
             </ul>
             <h4>
                 <a id="user-content-adjust-object-io" class="anchor" href="#adjust-object-io" aria-hidden="true"><svg
@@ -724,46 +777,57 @@ opsops<!DOCTYPE html>
                     <strong>A.verifyInput: collectionName: ...keys</strong> : 'key-' to remove this key, 'key' or 'key+'
                     to keep this result key, 'key!' to require user must sent to server. Used with model record-type
                     verify.</li>
-                    - A.verifyInput: kiểm tra các keys có đúng định dạng qui định từ model hay không, nếu đúng thì trả giá trị về client hoặc tiếp tục thực thi lệnh kế tiếp. </br>
-                    - collectionName: tên collectionName để ghi giá trị vào </br>
-                    - ... keys: định nghĩa key và giá trị cho từng key </br> </br>
+                    <p>
+                        - A.verifyInput: kiểm tra các keys có đúng định dạng qui định từ model hay không, nếu đúng thì trả giá trị về client hoặc tiếp tục thực thi lệnh kế tiếp. </br>
+                        - collectionName: tên collectionName để ghi giá trị vào </br>
+                        - ... keys: định nghĩa key và giá trị cho từng key </br> 
+                    </p>
 
-                    VD: </br>
-                    - collectionName: demo </br>
-                    - keys: name, age, ... </br>
-
-                    `A.verifyInput: demo: ...` // trả về tất cả các key đúng định dạng, những key sai định dạng sẽ trả về client code 500, những key không tồn tại ở model sẽ bị loại trừ. </br>
-                    `A.verifyInput: demo: name!, ...` // bắt buộc body phải truyền key name vào, các key khác có hay không đều được. </br>
-                    `A.verifyInput: demo: name-, ...` // không cần trả về client key name, các key khác vẫn trả bình thường. </br>
-                    `A.verifyInput: demo: name+` // chỉ trả về một key name nhưng không bắt buột, có hoặc không truyền đều được. </br>
-                    + Lưu ý: 'key+' hoàn toàn giống với 'key'. </br> </br>
+                    <p>
+                        collectionName: demo </br>
+                        keys: name, age, ... </br> </br>
+                        `A.verifyInput: demo: ...` <br>
+                        trả về tất cả các key đúng định dạng, những key sai định dạng sẽ trả về client code 500, những key không tồn tại ở model sẽ bị loại trừ. </br>
+                        `A.verifyInput: demo: name!, ...` <br>
+                        bắt buộc body phải truyền key name vào, các key khác có hay không đều được. </br>
+                        `A.verifyInput: demo: name-, ...` <br>
+                        không cần trả về client key name, các key khác vẫn trả bình thường. </br>
+                        `A.verifyInput: demo: name+` <br>
+                        chỉ trả về một key name nhưng không bắt buột, có hoặc không truyền đều được. </br>
+                    </p>
+                    *Lưu ý: 'key+' hoàn toàn giống với 'key'. </br> </br>
                 <li>
                     <strong>A.refactorOutput: bodyData: ...keys</strong> : same as verifyInput param, but dont valid
                     'key!'.</li>
-
+                    <p>
                     - A.refactorOutput: tương tự như A.verifyInput nhưng các key không cần phải đúng định dạng qui định từ modal. </br>
                     - bodyData: là body mà server trả về.   </br>
-                    - ... keys: định nghĩa key và giá trị cho từng key </br> </br>
-
-                    VD:
-                    - TH1: client chưa có data </br>
-                    `A.mixObject::({ </br>
-                        "name" : "gitgam", </br>
-                        "age"  : 10 </br>
-                    }) </br>
-                    `A.refactorOutput: ...` // trả về client tất cả các key có trong object. </br>
-                    `A.refactorOutput: name-, ...` // không trả về  giá trị key name, còn lại các key khác trả về bình thường. </br>
-                    `A.refactorOutput: name` // chỉ trả về  giá trị một key name. </br> </br>
+                    - ... keys: định nghĩa key và giá trị cho từng key 
+                    </p>
+                    <strong>
+                        - Trường hợp: client chưa có data </br>
+                    </strong>
+                    <p>
+                        `A.mixObject::({ "name" : "gitgam", "address""  : "Xa Lo Ha Noi" }) </br>
+                        `A.refactorOutput: ...` </br>
+                        Trả về client tất cả các key có trong object. </br>
+                        `A.refactorOutput: name-, ...` <br>
+                        Không trả về  giá trị key name, còn lại các key khác trả về bình thường. </br>
+                        `A.refactorOutput: name` <br>
+                        Chỉ trả về  giá trị một key name.
+                    </p>
+                    <strong>
+                        - Trường hợp: client đã có data </br>
+                    </strong>
                     
-                    -TH2: client đã có data </br>
+                    
                     * Đối với trường hợp này, khi ta thêm mới dữ liệu vào data, ta phải gán các giá trị mới vào một biến x (tên biến tùy ý). </br>
-                    `A.mixObject > x::({ </br>
-                        "hobbies" : "playing game" </br>
-                    }) </br>
+                    `A.mixObject > x::({ "hobbies" : "playing game" }) </br>
                     * Nếu không gán giá trị mới vào x thì A.refactorOutput chạy chỉ trả về giá trị của các key mới còn key cũ thì không. </br>
                     `A.refactorOutput: ...` // trả về client tất cả các key cũ đã có và key mới được thêm. </br>
                     `A.refactorOutput: x.name-, ...` // không trả về  giá trị key name, còn lại các key khác trả về bình thường. </br>
                     `A.refactorOutput: x.name` // chỉ trả về  giá trị một key name. </br>
+                  
             </ul>
             <h4>
                 <a id="user-content-database-raw-object" class="anchor" href="#database-raw-object"
