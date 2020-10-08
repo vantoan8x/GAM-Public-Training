@@ -320,6 +320,10 @@ opsops<!DOCTYPE html>
                 <li>
                     <p><strong>A.verifyObject: model: obj</strong> : verify object structure with defined model
                         structure.</p>
+                    - model: tên model <br>
+                    - obj: obj cần verify <br>
+                    `A.verifyObject: test: infor` 
+                    Nếu obj truyền vào các value không đúng định dạng của model sẽ trả về undefined và các key không tồn tại trong model thì các key đó ở obj bị triệt tiêu
                 </li>
                 <li>
                     <p><strong>A.unifyObject: obj</strong> : Unified object for remove all duplicated object in array
@@ -335,9 +339,14 @@ opsops<!DOCTYPE html>
                     Ngược lại uniquizedObject
                 `A.uniquizedObject: _id` // ObjectID thành ObjectID string
 
-                </li>
+                </li>  
                 <li>
-                    <p><strong>A.transArrayToObject: keyPath: arrs</strong> : transform array to object by keypath.</p>
+                    <p><strong>A.transArrayToObject: keyPath: hasOverride = false :restKey arrs</strong> : transform array to object by keypath.</p>
+                    - keyPath: truyền key cần trans vào <br/>
+                    - arrs: mảng chứa các ojb <br/>
+                    - hasOverride: mặc định là false sẽ đưa các keypath trùng nhau vào một mảng, true sẽ đè chồng các Keypath giống nhau các key khác sẽ ưu tiền ojb cuối
+                    - restKey: những key không phù hợp sẽ lưu vào restKey mặc định là rest
+
                 </li>
             </ul>
             <h4>
@@ -554,6 +563,9 @@ opsops<!DOCTYPE html>
                 <li>
                     <strong>A.responseObject: code=200: obj={}: returnRaw=false: forceStop=false</strong> : Return
                     object to client.</li>
+                    - code: status muốn trả về  <br>    
+                    - obj : obj muốn trả về
+
             </ul>
             <h4>
                 <a id="user-content-string-function" class="anchor" href="#string-function" aria-hidden="true"><svg
@@ -623,13 +635,24 @@ opsops<!DOCTYPE html>
                     </svg></a>Role, Feature Checking</h4>
             <ul>
                 <li>
+                    <strong>A.grantToken: token: permission: expired</strong> : Grant token access for a permission string key, in expired.</li>
+                    - token: token truyền lên từ client <br>
+                    - permission: key string <br>
+                    - expired: thời gian tồn tại tính bằng giây <br>
+                    VD: `A.grantToken: token: key: 60` <br>
+                    token tồn tại 60 giây <br>
+                    <strong>A.checkGrantToken: token: permission</strong> : Check Grant token access for a permission.</li>  <br>
+                    `A.checkGrantToken: token: key`<br>
+                    Check token có thời hạn không nếu còn thì tiếp tực xử lý các hàm bên dưới nếu hết thời hạn sẽ trả về client code : 503
+
+                <li>
                     <strong>A.checkPermission: model='role': idKeyName='roleId': ...permissionKeys</strong> : Check user
                     role in Param.user[idKeyName] with list of permissionKeys.</li>
-                    - model: tên của model mặc định là role
-                    - idKeyName: id của role cần check 
-                    - ...permissionKeys: view, edit, delete, create, ...
-                    VD: 
-                    `A.checkPermission(*): role: P.role._id: user.view: user.edit` 
+                    - model: tên của model mặc định là role <br>
+                    - idKeyName: id của role cần check <br>
+                    - ...permissionKeys: view, edit, delete, create, ... <br>
+                    VD: <br>
+                    `A.checkPermission(*): role: P.role._id: user.view: user.edit` <br>
                 <li>
                     <strong>A.checkRole: model: modelIdName: roleModel: ...keys</strong> : Check user access resource by
                     role base.</li>
@@ -955,6 +978,10 @@ opsops<!DOCTYPE html>
                     <strong>A.ID: id</strong> :</li>
                 <li>
                     <strong>A.aggregate: collectionName: ... : queryCmds : ...</strong> :</li>
+                    Sử dụng tương tự như aggregate của mongodb
+                    <a href="https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/">Link tài liệu</a> <br>
+                    VD: <br>
+	                `A.aggregate: test: ({"$sort": { "name" : -1}}) : ({"match": {"user" : "@name"}}): ({"limit": 2})`
                 <li>
                     <strong>A.populate: ... : collectionName: localField: foreignField='_id': '+/-': projectKeys :
                         ...</strong> :</li>
@@ -1042,8 +1069,9 @@ opsops<!DOCTYPE html>
                     `A.checkFileExist: fromPath` // kiểm tra file có tồn tại không
                 <li>
                     <strong>A.fileComponent: filepath</strong> : plit filepath to component (ext, name, base, path).
-                    `A.fileComponent: @filepath` // trả về ext, name, base, path
                 </li>
+                    `A.fileComponent: @filepath` // trả về ext, name, base, path
+
             </ul>
             <h4>
                 <a id="user-content-file-zip" class="anchor" href="#file-zip" aria-hidden="true"><svg
@@ -1078,7 +1106,11 @@ opsops<!DOCTYPE html>
                 <li>
                     <strong>A.chmodFile: fromPath: mode: recursive=false</strong> :</li>
                 <li>
+                    `A.chmodFile: @Path: mode:`
+                    @Path = "a" , mode = 777. chmod fromPath recursive: true thì sẽ chmod tất cả file và thư mực nằm trong fromPath
                     <strong>A.chownFile: fromPath: user: group: recursive=false</strong> :</li>
+                    `A.chmodFile: @Path: mode:`
+                    @Path = "a" , user = "gitgam". chown fromPath recursive: true thì sẽ chown tất cả file và thư mực nằm trong fromPath
             </ul>
             <hr>
             <h4>
@@ -1092,6 +1124,9 @@ opsops<!DOCTYPE html>
             <ul>
                 <li>
                     <strong>A.shellExec: cmd: showLog=false</strong> : Run system command.</li>
+                    Sử dụng các lệnh của terminal <br>
+                    VD: `A.shellExec > xyz: @cmd:` //@cmd = "ls"
+
             </ul>
             <hr>
             <h4>
@@ -1197,10 +1232,23 @@ compressed	: compressed
                     <strong>A.setReqTimeout: timeout</strong> : Set request timeout in second to extend duration of
                     current connection.</li>
                 <li>
-                    <strong>A.sendDataSync: method: serverUrl: data: header: callback</strong> : send message to server
+                    <strong>A.sendData: method: serverUrl: data: header: callback</strong> : send message to server
                     URL, using with sync/await or callback still support both. Remember enable imHTTP config.</li>
+                    - method: các phương thức POT, GET, PUT, DELELTE <br>
+                    - data: data cân gửi lên server <br>
+                    - header: cần gửi lên <br>
+                    `A.sendData: @method: @serverUrl` <br>
+                    method = "POST", serverUrl = "http://127.0.0.1:12000/product/s"
                 <li>
-                    <strong>A.downloadRangeData: method: serverUrl: data: header: type='json'</strong> :</li>
+                    <strong>A.downloadRange: { method, url, data, header, filePath, typeFile='json', partLength, limitPart} : dowload part of url data, param is an object.
+                    </strong></li>
+                    Tương tự như sendData
+                    `A.downloadRange: @call` <br>
+                    - call: { <br>
+                        "method" : "POST", <br>
+                        "serverUrl" : "http://127.0.0.1:12000/product/s" <br>                  
+                    }
+                    
                 <li>
                     <strong>A.handleBodyData: config</strong> : handle request body (auto parse).</li>
                 <li>

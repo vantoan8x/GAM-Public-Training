@@ -16,6 +16,39 @@ const TestRoute = {
 
 	}
 };
+// chmodFile
+TestRoute.POST.push([["/chmodFile"], [
+	`A.chownFile: @fromPath: @mode:`
+
+]]);
+// grantToken
+TestRoute.POST.push([["/grantToken"], [
+	`A.grantToken: token: _id: 10`
+
+]]);
+
+// sendDataSync
+TestRoute.POST.push([["/sendDataSync"], [
+	// `A.downloadRange: @a`
+	`A.checkGrantToken: token: _id`,
+	`A.sendData: @method: @serverUrl`
+
+]]);
+
+// responseObject
+TestRoute.POST.push([["/responseObject"], [
+	`A.mixObject > xyz ::{
+		"name": "aaaaa",
+		"as": "aaa",
+		"respReturn": true
+	}`,
+	`A.printObject`,
+
+	`A.responseObject::@xyz`,
+	`A.printObject`,
+	`A.refactorOutput`	
+
+]]);
 
 // setReqTimeout 
 TestRoute.POST.push([["/setReqTimeout"], [
@@ -23,10 +56,9 @@ TestRoute.POST.push([["/setReqTimeout"], [
 	`A.sleep: 10`,
 	`A.printObject`
 
-
 ]]);
 
-// transArrayToObject
+// shellExec
 TestRoute.POST.push([["/shellExec"], [
 	`A.shellExec > xyz: @cmd:`
 
@@ -34,7 +66,7 @@ TestRoute.POST.push([["/shellExec"], [
 
 // transArrayToObject
 TestRoute.POST.push([["/transarraytoobject"], [
-	`A.transArrayToObject: @test: a: true`
+	`A.transArrayToObject: @test: a: false`
 
 ]]);
 
@@ -63,14 +95,15 @@ TestRoute.POST.push([["/uniquizedObject"], [
 
 // aggregate
 TestRoute.POST.push([["/aggregate"], [
-	`A.aggregate: test: ({
-		 user: 123456
-	}) `,
+	`A.printObject`,
+	`A.uniquizedObject`,
+	`A.aggregate: test: ({"$sort": { "name" : -1}}) : ({"match": {"user" : "@name"}}): ({"limit": 2})`
 
 ]]);
 
 // verifyObject
 TestRoute.POST.push([["/verifyObject"], [
+	
 	`A.verifyObject: test`,
 	`A.printObject`
 

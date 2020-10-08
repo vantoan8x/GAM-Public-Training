@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Config mongo</h3>
+    ServerURL, CommonDB, UserModel, Extra, Vendor: "mongodb" <br><br>
+    - ServerURL: "mongodb://user:password@ip:port/namedb?authSource=" <br>
+    - CommonDB: namedb, <br>
+    - UserModel: authSource <br>
+    - Extra : { <br>
+        A: ServerURL <br>
+        B: ServerURL <br>
+     }
+    <h3>Sử dụng được tất cả các hàm xử lý db</h3>
+    VD: <br>
+    `A.insertOne: A.test`, // insert document mới vào collection test của db A <br>
+    `A.findAll: B.product`, // Find tất cả  document của collection product của db B <br>
+    `A.Delete: cart`, // Delete cart của db mặc định có thể ghi main.cart = cart <br>
+
+</body>
+</html>
