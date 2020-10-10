@@ -572,48 +572,63 @@ opsops<!DOCTYPE html>
                     <strong>A.printObject: fromKey: toKey</strong> : print object content to console, no result</li>
                     in obj ra màn hình <br>
                     <p>
-                        `A.printObject` // in body <br>
-                        `A.printObject(*)` // in tất cả dữ liệu từ client gửi lên <br>
-                        `A.printObject(*): P.route` // in route <br>
-                        `A.printObject(*): P.header` // in header <br>
+                        `A.printObject` -> in body <br>
+                        `A.printObject(*)` -> in tất cả dữ liệu từ client gửi lên <br>
+                        `A.printObject(*): P.route` -> in route <br>
+                        `A.printObject(*): P.header` -> in header <br>
                         ...
                     </p>
                 <li>
                     <strong>A.jsScript: objContext: jsScript</strong> : Run script in context objContext global.</li>
                     <p>
-                        Viết câu lệnh thực thi jsScript <br>
-                        `A.jsScript::( </br>
-                            if(!pipeData) { </br>
-                                return {"respData": "pipeData does not exist", "respReturn": true, "respCode": 404}; <br>
-                            } </br>
-                            return pipeData; </br>
-                    )`, </br>
-                    - respData: trả data về client </br>
-                    - respReturn: dừng tại đây </br>
-                    - respCode: trả code về client
+                        <p>
+                            Viết câu lệnh thực thi jsScript <br>
+                            `A.jsScript::( </br>
+                                if(!pipeData) { </br>
+                                    return {"respData": "pipeData does not exist", "respReturn": true, "respCode": 404}; <br>
+                                } </br>
+                                return pipeData; </br>
+                        )`, </br>
+                        </p>
+                        <p>
+                            - respData: trả data về client </br>
+                            - respReturn: dừng tại đây </br>
+                            - respCode: trả code về client
+                        </p>
+                     
+                  
                     </p>
                     
                     <strong>A.sleep: second</strong> : sleep in seconds.</li> 
                     <p>
-                        Sau khoảng thời gian sleep mới tiếp tực thực thi các hàm bên dưới </br>
-                        `A.sleep: 10` (mặc định 1 giây)
+                        <p>
+                            Sau khoảng thời gian sleep mới tiếp tực thực thi các hàm bên dưới </br>
+                            `A.sleep: 10` (mặc định 1 giây)
+                        </p>
+                   
                     </p>
                 <li>
                     <strong>A.pipeRoute: pipeName</strong> : include another route by pipeName into this pipe line to
                     run.</li>
                     <p>
-                        pipeName : tên của route cần chạy<br><br>
-                        `A.pipeRoute: user` <br>
-                        gọi vào api có đặt name = user để thực thi
+                        <p>pipeName : tên của route cần chạy</p>
+                        <p>
+                            `A.pipeRoute: user` <br>
+                            Gọi vào api có đặt name là user để thực thi
+                        </p>
                     </p>
                 <li>
                     <strong>A.responseObject: code=200: obj={}: returnRaw=false: forceStop=false</strong> : Return
                     object to client.</li>
                     <p>
-                        - code: status muốn trả về  <br>    
-                        - obj : obj muốn trả về <br> <br>
-                        `A.responseObject: 200: user` <br>
-                        Trả về client với mã code 200 và obj user
+                        <p>
+                            - code: status muốn trả về  <br>    
+                            - obj : obj muốn trả về 
+                        </p>
+                        <p>
+                            `A.responseObject: 200: user` <br>
+                            Trả về client với mã code 200 và object user
+                        </p>                        
                     </p>
 
             </ul>
@@ -646,8 +661,7 @@ opsops<!DOCTYPE html>
                         - Dấu (: "^OB", "\\(" </br>
                         - Dấu ): "^CB", "\\)" </br>
                         - Có thể chèn theo kí tự hexa</br></br>
-                    </p>
-        
+                    </p>        
                 <li>
                     <strong>A.joinWrapString: joinLetter: BeforeLetter: AfterLetter: ...strings</strong> :</li>
 
@@ -717,13 +731,76 @@ opsops<!DOCTYPE html>
                 <li>
                     <strong>A.checkRole: model: modelIdName: roleModel: ...keys</strong> : Check user access resource by
                     role base.</li>
+                    <p>
+                        - model: colletion cần checkFeature </br>
+                        - modelIdName: _id của feature cần check </br>
+                        - roleModel: colletion của bảng role
+                        - keys: key để feature </br>
+                    </p>
+                    <p>
+                    	`A.checkRole: feature: _id: role : user.view: user.edit`,
+                        user.view, user.code  một trong 2 có value: false thì sẽ trả về client err "User not permited".  Các keys value true thì sẽ check thành công và thực thi các lệnh bên dưới
+                    </p>
+                    <p>
+                        Colletion: checkRole </br>
+                        { </br>
+                            "name" : "test", </br>
+                            "members" : [ </br>
+                                { </br>
+                                    "_id" : ObjectId("5f72beade6213c418435a5db"), </br>
+                                    "roleId" : ObjectId("5f5f762062b78725462a0b2d") </br>
+                                } </br>
+                            ], </br>
+                        } </br>
+                        Colletion: role </br>
+                        { </br>
+                            "name" : "test", </br>
+                            "permit" : { </br>
+                                "user" : { </br>
+                                    "view" : true, </br>
+                                    "edit" : true, </br>
+                                    "delete" : true, </br>
+                                    "create" : true </br>
+                                }}} </br>
+                    </p>
+                    <p>
+                        arrs members ở collection checkRole sẽ lưu các id của user và id của role. 
+                    </p>
                 <li>
                     <strong>A.checkFeature: model: modelIdName: ...keys</strong> : check the feature is enable or not.
                 </li>
+                    <p>
+                        - model: colletion cần checkFeature </br>
+                        - modelIdName: _id của feature cần check </br>
+                        - keys: key để feature </br>
+                    </p>
+                    <p>
+                        A.checkFeature: feature: _id: code: view </br>
+                        code,view một trong hai có value: false thì sẽ trả về client err: "Feature was disabled". code,view : true thì check thành công và thực thi các hàm bên dưới 
+                    </p>
+                    <strong>*db của feature:</strong>
+                    <p>
+                        VD: </br>
+                        { </br>
+                            "name" : "test", </br>
+                            "permit" : { </br>
+                                "task" : true, </br>
+                                "code" : true, </br>
+                                "abc" : true </br>
+                            }, </br>
+                            "members" : ["5f72beade6213c418435a5dd"], </br>
+                        } </br>
+                        arrs members sẽ lưu các id của user có quyền checkFeature. Nếu user không có id trong members thì checkFeature thất bại.
+                    </p>
                 <li>
                     <strong>A.checkCompanyFeature: ...keys</strong> : check company feature enable or not.</li>
                 <li>
                     <strong>A.getView: viewName: extras</strong> : get html view of a defination view.</li>
+                    <p>
+                        - viewName: tên của View muốn trả về  </br>
+                        - extras: truyền data vào để gọi trong View
+                    </p>
+                    `A.getView: sendnotification: key`
             </ul>
             <h4>
                 <a id="user-content-cache-object" class="anchor" href="#cache-object" aria-hidden="true"><svg

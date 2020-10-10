@@ -16,6 +16,27 @@ const TestRoute = {
 
 	}
 };
+// setCookie
+TestRoute.GET.push([["/setCookie"], [
+	`A.setCookie(*): ({
+		"a" : "b"
+	}): false`,
+]]);
+
+// getView 
+TestRoute.POST.push([["/getView"], [
+	`A.printObject`,
+	`A.getView: abc`
+]]);
+
+// handleBodyData
+TestRoute.POST.push([["/handleBodyData"], [
+	`A.printObject`,
+	`A.handleBodyData > respData`,
+	`A.printObject(x)`,
+], {
+	unHandleBody: true
+}]);
 
 // chmodFile
 TestRoute.POST.push([["/chmodFile"], [
