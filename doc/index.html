@@ -1,4 +1,4 @@
-opsops<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -1396,6 +1396,18 @@ compressed	: compressed
                     <strong>A.parseBodyData: config: header</strong> : parse request body.</li>
                 <li>
                     <strong>A.setCookie: obj: hasEncoded=true</strong> : setcookie value to response to client.</li>
+                    <p>
+                        obj: obj để set Cookie gửi về cho client
+                    </p>
+                    <p>
+                        A.setCookie: ({ "key1" : "a", "key2" : "b" }): true </br>
+                        Trả về client cookie theo obj đã set. Server sẽ nhận được cookie qua Header nếu client đã được setCookie trước đó bật hasEncoded = true thì cookie server đươc sẽ được hash.  </br>
+                        expires, HttpOnly, Secure: </br>
+                        - expires: xét thời gian tồn tại cho cookie </br>
+                        - HttpOnly/ Secure: bật : true, tắt: false
+                            
+                    </p>                    
+
             </ul>
             <hr>
             <h3>

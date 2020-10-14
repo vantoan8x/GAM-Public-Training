@@ -13,14 +13,27 @@ const TestRoute = {
 		profiling: true,
 		IgnoreModifiedAt: true,
 		imCache: true,
+		imCookie: true
 
 	}
 };
 // setCookie
 TestRoute.GET.push([["/setCookie"], [
-	`A.setCookie(*): ({
-		"a" : "b"
-	}): false`,
+	`A.printObject(*): P.header`,
+	`A.setCookie: ([
+		{
+		"expires" : "Sun, 11 Oct 2020 23:20:32 GMT",
+		"Secure": true,
+		 "a" : {
+			"key1" : "abc",
+			"key2" : "asbc"
+		}}, {
+			"HttpOnly": true,
+			 "b" : {
+			"key1" : "abc",
+			"key2" : "asbc"
+		}}
+	]): false`
 ]]);
 
 // getView 
@@ -95,8 +108,8 @@ TestRoute.POST.push([["/transarraytoobject"], [
 
 // getDBObject
 TestRoute.POST.push([["/getdb"], [
-	`A.updateDBObject > xyz: test:: _id: true`,
-	// `A.groupObject:@test: a`
+	`A.printObject`,
+	`A.getDBObject: test`,
 
 ]]);
 
