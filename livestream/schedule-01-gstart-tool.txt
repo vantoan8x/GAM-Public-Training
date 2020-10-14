@@ -1,0 +1,51 @@
+Oct 14th, 2020
+ 1. How to use Linux, Atom, VS Code. @vantoan8x
+ 2. How to know Javascript, CSS, HTML. @vantoan8x
+
+Oct 16th, 2020
+ 3. Working witn Bash. @tanloc27
+ 4. Working with Git. @tanloc27
+
+Oct 18th, 2020
+ 5. Working with GStart. @khoaquocngo
+ 6. Create Project Using GStart. @khoaquocngo
+
+Oct 20th, 2020
+ 7. Connect Database and Session. @thtuan
+ 8. Authentication with GStart. @thtuan
+
+Oct 22th, 2020
+ 9. Upload and Download File. @trungpham71198
+ 10. API Profiling in GStart. @trungpham71198
+
+Oct 24th, 2020
+ 11. Advance GStart MRC, Part 1 - Model. @vantoan8x
+ 12. Advance GStart MRC, Part 2 - Route. @khoaquocngo
+
+Oct 26th, 2020
+ 13. Advance GStart MRC, Part 3 - Controller. @gialynguyen
+ 14. CronJob Scheduler in GStart. @thtuan
+
+Oct 28th, 2020
+ 15. Role & Permission in GStart. @tanloc27
+ 16. Work with File in GStart. @trungpham71198
+
+Oct 30th, 2020
+ 17. Deploy Application in Cloud. @vantoan8x
+ 18. GStart API Statistic & Report Event. @vantoan8x
+
+Nov 1th, 2020
+ 19. GStart Send Mail. @khoaquocngo
+ 20. GStart Push Notification. @thtuan
+
+Nov 3th, 2020
+ 21. GStart UDP Server. @trungpham71198
+ 22. GStart Sub Request. @trungpham71198
+
+Nov 5th, 2020
+ 23. GStart Advance Query Database. @gialynguyen
+ 24. GStart with Web Socket. @gialynguyen
+
+Nov 7th, 2020
+ 25. Test Case, Unit Test with GStart. @vantoan8x
+ 26. Course Summary. @vantoan8x
